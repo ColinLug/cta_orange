@@ -7,7 +7,7 @@ Exposes it as an Orange Data Table too.
 
 import os
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any
 
 import numpy as np
 from AnyQt.QtWidgets import QFileDialog
@@ -15,7 +15,6 @@ from Orange.data import ContinuousVariable, Domain, StringVariable, Table
 from Orange.widgets import gui
 from Orange.widgets.settings import Setting
 from Orange.widgets.widget import Output
-
 from orangecta.cta_kernel.helpers.ref import CTARef
 from orangecta.cta_kernel.helpers.session import CTASession
 from orangecta.cta_kernel.helpers.widgets import OWCTAKernelBase
@@ -162,28 +161,28 @@ class LoadTSVFile(OWCTAKernelBase):
         # Fix the widget's height to the minimum
         self.setFixedHeight(self.minimumSizeHint().height())
 
-    def _params(self) -> Dict[str, Any]:
+    def _params(self) -> dict[str, Any]:
         """
         Collect widget parameters for the operator call.
 
         Returns:
-            Dict[str, Any]: The parameters recorded onto the GraphSpec.
+            dict[str, Any]: The parameters recorded onto the GraphSpec.
         """
 
         # Parameters are recorded into the GraphSpec and influence caching.
         return {"path": self.path}
 
-    def _collect_inputs(self) -> Dict[str, Optional[CTARef]]:
+    def _collect_inputs(self) -> dict[str, CTARef | None]:
         """
         Collect wiring inputs for the operator call.
 
         Returns:
-            Dict[str, Optional[CTARef]]: Empty as this widget has no input.
+            dict[str, Optional[CTARef]]: Empty as this widget has no input.
         """
         return {}
 
     def _send_none(self) -> None:
-        """Clear outputs of the load widget"""
+        """Clear outputs of the widget"""
         self.Outputs.cta_data.send((None, None))
         self.Outputs.data_table.send(None)
 
@@ -269,7 +268,7 @@ class LoadTSVFile(OWCTAKernelBase):
         Build the scope dict of the widget
 
         Returns:
-            Dict[str, Any]: The scope to use to create a session.
+            dict[str, Any]: The scope to use to create a session.
         """
 
         if not (self.dataset_id and self.slice_id and self.document_role and self.source_role):

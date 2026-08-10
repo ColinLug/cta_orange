@@ -1,4 +1,5 @@
 import sysconfig
+
 # Category metadata.
 
 # Category icon show in the menu
@@ -13,8 +14,9 @@ DESCRIPTION = """Add-on for researchers in text analysis for Orange3"""
 LONG_DESCRIPTION = """
 WORK IN PROGRESS
 """
-from .load import LoadTSVFile
 from .extract_string import ExtractStringsCTA
+from .load import LoadTSVFile
+
 #from .load import LoadTSVFile
 #from .load import LoadTSVFile
 #from .load import LoadTSVFile
@@ -24,6 +26,6 @@ from .extract_string import ExtractStringsCTA
 
 # Orange utilise __all__ pour découvrir les widgets
 __all__ = [
-    "LoadTSVFile",
-    "ExtractStringsCTA"
+    "ExtractStringsCTA",
+    "LoadTSVFile"
 ]

@@ -1,14 +1,13 @@
 """Orange Canvas Widget for the CTA's module. Extract strings from
 a table's column."""
 
-from typing import Any, Dict, Optional
+from typing import Any
 
 import numpy as np
 from Orange.data import ContinuousVariable, Domain, StringVariable, Table
 from Orange.widgets import gui
 from Orange.widgets.settings import Setting
 from Orange.widgets.widget import Input, Output
-
 from orangecta.cta_kernel.helpers.ref import CTARef
 from orangecta.cta_kernel.helpers.session import CTASession
 from orangecta.cta_kernel.helpers.widgets import OWCTAKernelBase
@@ -51,7 +50,7 @@ class ExtractStringsCTA(OWCTAKernelBase):
     def __init__(self):
         """Manages the class creation. Basic UI is created here."""
         super().__init__()
-        self.ref: Optional[CTARef] = None
+        self.ref: CTARef | None = None
         basicBox = gui.widgetBox(
             widget=self.controlArea,
             box="Importation's mode",
@@ -118,7 +117,7 @@ class ExtractStringsCTA(OWCTAKernelBase):
         self.setFixedHeight(self.minimumSizeHint().height())
 
     @Inputs.cta_data
-    def set_ctaData(self, cta_data: Optional[tuple]) -> None:  # noqa: D401
+    def set_ctaData(self, cta_data: tuple | None) -> None:
         """
         Receive the upstream CTAData : the session and a ref to the upstream raw_table
         """
@@ -127,7 +126,7 @@ class ExtractStringsCTA(OWCTAKernelBase):
         self._logic.session = session
         self.ref = ref
 
-    def _params(self) -> Dict[str, Any]:
+    def _params(self) -> dict[str, Any]:
         """
         Collect widget parameters for the operator call.
 
@@ -144,7 +143,7 @@ class ExtractStringsCTA(OWCTAKernelBase):
             else None,  # Est-ce correct?
         }
 
-    def _collect_inputs(self) -> Dict[str, Optional[CTARef]]:
+    def _collect_inputs(self) -> dict[str, CTARef | None]:
         """
         Collect wiring inputs for the operator call.
 
@@ -154,7 +153,7 @@ class ExtractStringsCTA(OWCTAKernelBase):
         return {"raw_table": self.ref}
 
     def _send_none(self) -> None:
-        """Clear outputs of the load widget"""
+        """Clear outputs of the widget"""
         self.Outputs.cta_data.send((None, None))
         self.Outputs.data_table.send(None)
 
@@ -177,8 +176,8 @@ class ExtractStringsCTA(OWCTAKernelBase):
 
     def handleNewSignals(self):
         """
-        Sends the data to Output. Here it means the created CTASession object,
-        as well as a CTARef to a table created and an orange data_table
+        Sends the data to Output. Here it means the CTASession object,
+        as well as a CTARef to a strings store created and an orange data_table
 
         Returns:
             Optional[bool]: None if no upstream or falsely named columns, True otherwise
@@ -219,7 +218,7 @@ class ExtractStringsCTA(OWCTAKernelBase):
                 # Création de la Table
                 metas_array = np.array(
                     [
-                        [string[key] for key in string.keys()]
+                        [string[key] for key in string]
                         for string in payload["strings"]
                     ],
                     dtype=object,
