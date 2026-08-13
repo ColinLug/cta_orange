@@ -42,13 +42,7 @@ to the corresponding `cta_orange.helpers...` module. No signal-shape change is
 required by this helper migration: the existing `(CTASession, CTARef)` transport
 can remain during Colin's bounded widget pass.
 
-The paths below describe the current repository layout only. They are not a
-packaging recommendation. During Colin's package-consolidation work, the widgets
-should ultimately move under the `cta_orange` package (for example
-`src/cta_orange/widgets/...`) so that helpers and widgets belong to the same
-distribution namespace. That relocation is outside this bounded helper slice.
-
-The affected widget modules in the current tree are:
+The affected widget modules are:
 
 - `src/widgets/load.py`
 - `src/widgets/extract_string.py`
@@ -109,14 +103,10 @@ the Orange boundary with `ValueError`.
 ## 6. Dependency and validation note
 
 `pyproject.toml` now declares `cta-kernel==0.1.0`. The helper contract passes
-against the researcher-supplied released-kernel snapshot, and the repository-level
-test run is green apart from the deliberate self-expiring widget smoke-test skip
-described below.
-
-The working repository does contain `uv.lock`; RF snapshots intentionally do not
-ship it. The researcher supplied the current lockfile separately while closing
-this slice, so absence of `uv.lock` from snapshots is not a migration blocker and
-does not imply that the repository lock needs to be created.
+against the researcher-supplied released-kernel snapshot. The repository's
+`uv.lock` could not be regenerated in the patch-building environment because
+that environment had no cached `cta-kernel` distribution and network access was
+disabled; regenerate the lock in the normal connected development environment.
 
 The pre-existing `tests/test_load.py` imports `widgets.load`, whose helper
 imports remain in the intentionally removed legacy `orangecta.cta_kernel.helpers`
@@ -126,53 +116,3 @@ in `src/widgets/load.py`; its existing assertion is unchanged, and collection
 automatically resumes once the widget imports are migrated. This keeps repository-
 level `pytest` usable without recreating a forbidden compatibility façade or
 claiming that widget migration belongs to the helper slice.
-
-## 7. Temporary ResearchFlow project status
-
-For the duration of this bounded helper slice, the current `cta_orange` checkout
-is intentionally being used as a ResearchFlow project so the researcher can use
-the RF snapshot/patch workflow while working in Colin's repository.
-
-The temporary RF project slug is `cta-orange`. The hyphenated slug is deliberate:
-RF patch filenames delimit their project token with underscores, so the earlier
-temporary slug `cta_orange` made patch association ambiguous. Patches targeting
-this checkout must therefore use `rf_patch_cta-orange_...zip` and manifests must
-declare `project = "cta-orange"`. This RF-only slug does not rename Colin's
-repository, the Python distribution, or any import package.
-
-This is a temporary operational exception, not a decision that Colin's repository
-should permanently contain the ResearchFlow record. The temporary `ai/` and
-`.researchflow/` material is accepted only for the bounded helper slice.
-
-At slice close, cleanup is an explicit handoff obligation. Before the repository
-is returned to Colin's normal stewardship, review and remove the temporary RF/AI
-material from his workspace and determine the appropriate history cleanup so
-temporary research-process records are not inadvertently retained. Preserve any
-durable project-level record still needed in the governing LingMod/RF context
-before that cleanup.
-
-## 8. Bounded helper slice completion
-
-The helper migration is complete for this bounded pre-ComHUM slice. The delivered
-helper layer is `cta_orange.helpers`, backed by the public `cta_kernel 0.1.0`
-runtime rather than duplicated private kernel services. The helper contract tests
-and repository-level tests pass under the boundary described above.
-
-No further helper-side implementation is required before handoff to Colin. The
-remaining work is widget/package work under Colin's responsibility:
-
-- migrate current widget imports to `cta_orange.helpers`;
-- adapt Claim and EvidenceBrowser away from raw evidence-store access;
-- remove or redesign legacy eager predicate parsing so kernel validation remains
-  authoritative;
-- apply the other widget-contract corrections recorded in this handoff;
-- relocate the widget package from the current top-level `src/widgets` layout
-  under `cta_orange` as part of package consolidation.
-
-The current RF enablement of Colin's checkout has now served its bounded purpose.
-Before handing the repository back, preserve this durable handoff in the governing
-LingMod/RF record, then remove the temporary `ai/` and `.researchflow/` material
-from Colin's workspace and repair repository history as appropriate so those
-temporary research-process records are not inadvertently retained. The cleanup
-must not remove the actual helper implementation, tests, dependency changes, or
-this handoff content until its durable copy has been preserved elsewhere.

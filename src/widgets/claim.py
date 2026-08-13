@@ -9,9 +9,9 @@ from Orange.widgets import gui
 from Orange.widgets.settings import Setting
 from Orange.widgets.widget import Input, Output
 
-from orangecta.cta_kernel.helpers.ref import CTARef
-from orangecta.cta_kernel.helpers.session import CTASession
-from orangecta.cta_kernel.helpers.widgets import OWCTAKernelBase
+from cta_orange.helpers.ref import CTARef
+from cta_orange.helpers.session import CTASession
+from cta_orange.helpers.widgets import OWCTAKernelBase
 
 
 def _single_line(text: str) -> str:
