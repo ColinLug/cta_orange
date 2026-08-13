@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "cta-kernel==0.1.0",
+    "cta-kernel==0.1.0"
 ]
 
 [build-system]
@@ -20,7 +20,6 @@ dev = [
     "anyqt==0.2.1",
     "numpy==2.4.2",
     "orange3==3.39.0",
-    "orange3-textable==3.2.7",
     "pyqt6>=6.11.0",
     "pyqt6-webengine>=6.11.0",
     "pytest>=9.1.1",
@@ -31,3 +30,9 @@ dev = [
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
+
+[project.entry-points."orange3.addon"]
+"cta-orange" = "cta_orange"
+
+[project.entry-points."orange.widgets"]
+"CTA" = "cta_orange.widgets"

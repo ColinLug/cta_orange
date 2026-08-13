@@ -39,10 +39,8 @@ class LoadTSVFile(OWCTAKernelBase):
 
     # Parameters/Settings of the LoadTSV widget
     path = Setting(".")
-    dataset_id = Setting("wns_fixture_v0")
-    slice_id = Setting("")
-    document_role = Setting("messages")
-    source_role = Setting("(chat,user)")
+    dataset_id = Setting("")
+    slice_id = Setting("all_strings")
     lastLocation = Setting(".")
 
     class Outputs:
@@ -110,44 +108,15 @@ class LoadTSVFile(OWCTAKernelBase):
             box=False,
             orientation="horizontal",
         )
-        gui.lineEdit(
+        gui.comboBox(
             widget=basicBox2Line2,
             master=self,
             value="slice_id",
             orientation="horizontal",
             label="Slice ID :",
             labelWidth=101,
+            items=["all_strings"],
             tooltip=("Slice ID to put in scope."),
-        )
-        gui.separator(widget=basicBox2, width=5)
-        basicBox2Line3 = gui.widgetBox(
-            widget=basicBox2,
-            box=False,
-            orientation="horizontal",
-        )
-        gui.lineEdit(
-            widget=basicBox2Line3,
-            master=self,
-            value="document_role",
-            orientation="horizontal",
-            label="Document role :",
-            labelWidth=101,
-            tooltip=("Documents to put in scope."),
-        )
-        gui.separator(widget=basicBox2, width=5)
-        basicBox2Line4 = gui.widgetBox(
-            widget=basicBox2,
-            box=False,
-            orientation="horizontal",
-        )
-        gui.lineEdit(
-            widget=basicBox2Line4,
-            master=self,
-            value="source_role",
-            orientation="horizontal",
-            label="Sources :",
-            labelWidth=101,
-            tooltip=("The sources to put in scope."),
         )
 
         gui.rubber(self.controlArea)
@@ -156,7 +125,7 @@ class LoadTSVFile(OWCTAKernelBase):
             master=self,
             label="Send",
             callback=self.sendData,
-            tooltip=("Send the datas to process them."),
+            tooltip=("Send the data to process it."),
         )
         # Fix the widget's height to the minimum
         self.setFixedHeight(self.minimumSizeHint().height())
@@ -270,15 +239,12 @@ class LoadTSVFile(OWCTAKernelBase):
         Returns:
             dict[str, Any]: The scope to use to create a session.
         """
-
-        if not (self.dataset_id and self.slice_id and self.document_role and self.source_role):
-            self.warning("Some fields are empty. Don't forget to annotate them.")
+        if not self.dataset_id:
+            self.warning("Dataset ID is empty. Don't forget to annotate it.")
         else: self.warning()
         scope = {
             "dataset_id": self.dataset_id,
             "slice_id": self.slice_id,
-            "document_role": self.document_role,
-            "source_role": self.source_role,
         }
 
         return scope

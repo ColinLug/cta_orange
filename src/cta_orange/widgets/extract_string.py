@@ -12,7 +12,6 @@ from cta_orange.helpers.ref import CTARef
 from cta_orange.helpers.session import CTASession
 from cta_orange.helpers.widgets import OWCTAKernelBase
 
-
 class ExtractStringsCTA(OWCTAKernelBase):
     """Widget that extracts distinct strings from a table column into a string store."""
     # Widget's name as displayed in the canvas
@@ -40,9 +39,9 @@ class ExtractStringsCTA(OWCTAKernelBase):
     op_id = "BuildStringStore"
     out_port = "string_store"
 
-    string_col = Setting("emoji_string")
-    source_id_cols = Setting("chat_id, user_id")
-    normalization_policy = Setting("")
+    string_col = Setting("")
+    source_id_cols = Setting("")
+    normalization_policy = Setting("None")
 
     want_main_area = False
     resizing_enabled = False
@@ -94,13 +93,14 @@ class ExtractStringsCTA(OWCTAKernelBase):
             box=False,
             orientation="horizontal",
         )
-        gui.lineEdit(
+        gui.comboBox(
             widget=basicBoxLine3,
             master=self,
             value="normalization_policy",
             orientation="horizontal",
             label="Normalization policy :",
             labelWidth=150,
+            items=["None", "strip", "lower", "nfkc", "emoji_strip_skin_tone"],
             # callback=self.sendButton.settingsChanged,
             tooltip=("The normalization policy to use."),
         )
@@ -111,7 +111,7 @@ class ExtractStringsCTA(OWCTAKernelBase):
             master=self,
             label="Send",
             callback=self.sendData,
-            tooltip=("Send the datas to process them."),
+            tooltip=("Send the data to process it."),
         )
         # Fix the widget's height to the minimum
         self.setFixedHeight(self.minimumSizeHint().height())

@@ -33,15 +33,6 @@ wheels = [
 ]
 
 [[package]]
-name = "appdirs"
-version = "1.4.4"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/d7/d8/05696357e0311f5b5c316d7b95f46c669dd9c15aaeecbb48c7d0aeb88c40/appdirs-1.4.4.tar.gz", hash = "sha256:7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41", size = 13470, upload-time = "2020-05-11T07:59:51.037Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/3b/00/2344469e2084fb287c2e0b57b72910309874c3245463acd6cf5e3db69324/appdirs-1.4.4-py2.py3-none-any.whl", hash = "sha256:a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128", size = 9566, upload-time = "2020-05-11T07:59:49.499Z" },
-]
-
-[[package]]
 name = "appnope"
 version = "0.1.4"
 source = { registry = "https://pypi.org/simple" }
@@ -66,15 +57,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/9a/8e/82a0fe20a541c03148528be8cac2408564a6c9a0cc7e9171802bc1d26985/attrs-26.1.0.tar.gz", hash = "sha256:d03ceb89cb322a8fd706d4fb91940737b6642aa36998fe130a9bc96c985eff32", size = 952055, upload-time = "2026-03-19T14:22:25.026Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/64/b4/17d4b0b2a2dc85a6df63d1157e028ed19f90d4cd97c36717afef2bc2f395/attrs-26.1.0-py3-none-any.whl", hash = "sha256:c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309", size = 67548, upload-time = "2026-03-19T14:22:23.645Z" },
-]
-
-[[package]]
-name = "backports-functools-lru-cache"
-version = "2.0.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/c0/dc/a1962ae19f83d2a92b8ac76ad2dfdeccf2748464f1560a51d343b9e2609a/backports.functools_lru_cache-2.0.0.tar.gz", hash = "sha256:dcbfa5e0dae8a014168807c9e026d33eead71df5af76c1fb78fd248bf07f6f99", size = 11578, upload-time = "2023-12-13T22:34:02.998Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c6/c6/4761a2ccb03d650ca803b11a7cdd69ff0696926d3fea218c8ca22c808448/backports.functools_lru_cache-2.0.0-py2.py3-none-any.whl", hash = "sha256:0a754323a46847735a112677fb8807b45f6d824d02a5795a50905218ac56a0d6", size = 6657, upload-time = "2023-12-13T22:34:00.587Z" },
 ]
 
 [[package]]
@@ -482,7 +464,7 @@ wheels = [
 [[package]]
 name = "cta-orange"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "cta-kernel" },
 ]
@@ -492,7 +474,6 @@ dev = [
     { name = "anyqt" },
     { name = "numpy" },
     { name = "orange3" },
-    { name = "orange3-textable" },
     { name = "pyqt6" },
     { name = "pyqt6-webengine" },
     { name = "pytest" },
@@ -508,7 +489,6 @@ dev = [
     { name = "anyqt", specifier = "==0.2.1" },
     { name = "numpy", specifier = "==2.4.2" },
     { name = "orange3", specifier = "==3.39.0" },
-    { name = "orange3-textable", specifier = "==3.2.7" },
     { name = "pyqt6", specifier = ">=6.11.0" },
     { name = "pyqt6-webengine", specifier = ">=6.11.0" },
     { name = "pytest", specifier = ">=9.1.1" },
@@ -630,15 +610,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/34/3b/214dcc19ee31d3d38fb5ad2755c11ef0514e5dc300bbaf41c0b69f393799/fonttools-4.63.0-cp314-cp314t-win32.whl", hash = "sha256:948428a275741f0b64b113c955425a953314f4b9ab9997f73a72c83e68e569c8", size = 2359326, upload-time = "2026-05-14T12:04:24.22Z" },
     { url = "https://files.pythonhosted.org/packages/dd/1e/3ff1a9b523058c2eeb6a9d50f5574e2a738200d0d94107d5bc4105e8da3f/fonttools-4.63.0-cp314-cp314t-win_amd64.whl", hash = "sha256:6d4741eb179121cab9eea4cb2393d24492373a260d7945006358c08cfbf45419", size = 2425829, upload-time = "2026-05-14T12:04:26.829Z" },
     { url = "https://files.pythonhosted.org/packages/2c/47/c99d5268f354002ce80f8d029cd9d7d872969da1de8b93d32de4dc56d6f4/fonttools-4.63.0-py3-none-any.whl", hash = "sha256:445af2eab030a16b9171ea8bdda7ebf7d96bda2df88ee182a464252f6e05e20d", size = 1164562, upload-time = "2026-05-14T12:04:29.092Z" },
-]
-
-[[package]]
-name = "future"
-version = "1.0.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/a7/b2/4140c69c6a66432916b26158687e821ba631a4c9273c474343badf84d3ba/future-1.0.0.tar.gz", hash = "sha256:bd2968309307861edae1458a4f8a4f3598c03be43b97521076aebf5d94c07b05", size = 1228490, upload-time = "2024-02-21T11:52:38.461Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/da/71/ae30dadffc90b9006d77af76b393cb9dfbfc9629f339fc1574a1c52e6806/future-1.0.0-py3-none-any.whl", hash = "sha256:929292d34f5872e70396626ef385ec22355a1fae8ad29e1a734c3e43f9fbc216", size = 491326, upload-time = "2024-02-21T11:52:35.956Z" },
 ]
 
 [[package]]
@@ -964,22 +935,6 @@ wheels = [
 ]
 
 [[package]]
-name = "lttl"
-version = "2.1.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "backports-functools-lru-cache" },
-    { name = "future" },
-    { name = "numpy" },
-    { name = "scipy" },
-    { name = "setuptools" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/8c/f1/1c6f3b1329ea4bd3df01769bd1f05ffb53bd5e3a3c6f161c69d64d4f1b17/lttl-2.1.0.tar.gz", hash = "sha256:bdbaca62631e2caae5ed6471930b4819e4ea3e8ccd77c4ed4df7eb40866609c6", size = 96750, upload-time = "2025-02-02T21:38:34.973Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/29/14/b398d1683e2594ddf915f1cbdbe45219a4877a7d6511085b756a9e63e83e/LTTL-2.1.0-py3-none-any.whl", hash = "sha256:ec8643912f0017b041cc2e8e334edfd2f20e8906ef31b16e08efd5b2aad72abc", size = 92705, upload-time = "2025-02-02T21:38:32.974Z" },
-]
-
-[[package]]
 name = "matplotlib"
 version = "3.11.1"
 source = { registry = "https://pypi.org/simple" }
@@ -1267,25 +1222,6 @@ wheels = [
 ]
 
 [[package]]
-name = "orange3-textable"
-version = "3.2.7"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "appdirs" },
-    { name = "chardet" },
-    { name = "future" },
-    { name = "lttl" },
-    { name = "orange3" },
-    { name = "pycountry" },
-    { name = "setuptools" },
-    { name = "treetaggerwrapper" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/6e/4b/82a1cd2a4521d8dc06b441ea3ec9be8cad98570aee4496fb9cc758e4d6d2/orange3_textable-3.2.7.tar.gz", hash = "sha256:92721d90acc1c76776b67f42587a9ef6b36a1dcffdc0c4eebd6e9b22afa750f4", size = 7023508, upload-time = "2025-10-20T14:33:50.435Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/b4/fc/64b2504d41603e1b53c411492eca3d4f5b09133494194823da4ade75f346/orange3_textable-3.2.7-py3-none-any.whl", hash = "sha256:2758987393e7a54a6c80d630a619b6a4527b87ebbc43140fdecacec4dd048c65", size = 205023, upload-time = "2025-10-20T14:34:49.089Z" },
-]
-
-[[package]]
 name = "packaging"
 version = "26.2"
 source = { registry = "https://pypi.org/simple" }
@@ -1515,15 +1451,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/cd/05/0a34433a064256a578f1783a10da6df098ceaa4a57bbeaa96a6c0352786b/pure_eval-0.2.3.tar.gz", hash = "sha256:5f4e983f40564c576c7c8635ae88db5956bb2229d7e9237d03b3c0b0190eaf42", size = 19752, upload-time = "2024-07-21T12:58:21.801Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/8e/37/efad0257dc6e593a18957422533ff0f87ede7c9c6ea010a2177d738fb82f/pure_eval-0.2.3-py3-none-any.whl", hash = "sha256:1db8e35b67b3d218d818ae653e27f06c3aa420901fa7b081ca98cbedc874e0d0", size = 11842, upload-time = "2024-07-21T12:58:20.04Z" },
-]
-
-[[package]]
-name = "pycountry"
-version = "26.2.16"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/de/1d/061b9e7a48b85cfd69f33c33d2ef784a531c359399ad764243399673c8f5/pycountry-26.2.16.tar.gz", hash = "sha256:5b6027d453fcd6060112b951dd010f01f168b51b4bf8a1f1fc8c95c8d94a0801", size = 7711342, upload-time = "2026-02-17T03:42:52.367Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/9c/42/7703bd45b62fecd44cd7d3495423097e2f7d28bc2e99e7c1af68892ab157/pycountry-26.2.16-py3-none-any.whl", hash = "sha256:115c4baf7cceaa30f59a4694d79483c9167dbce7a9de4d3d571c5f3ea77c305a", size = 8044600, upload-time = "2026-02-17T03:42:49.777Z" },
 ]
 
 [[package]]
@@ -2060,12 +1987,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/57/a9/a2584b8313b89f948
 wheels = [
     { url = "https://files.pythonhosted.org/packages/96/8d/1080ee4c231f361b6ce4470d556c8c435b67c7e0753aaa641497ee92f88b/traitlets-5.15.1-py3-none-any.whl", hash = "sha256:770a53705f84b81ac107e83a1b3328ff2dae16094d8fc3cfc004e4b22dfd8e92", size = 85858, upload-time = "2026-06-03T12:26:04.395Z" },
 ]
-
-[[package]]
-name = "treetaggerwrapper"
-version = "2.3"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/0e/9d/a48c990ca015a80ff8f19061aebba41509851b01c1b90bc7d0346af13ee0/treetaggerwrapper-2.3.tar.gz", hash = "sha256:8d4a291fef263ee8b546e6368e407e984ba466d5afa56e6ffc2ae495f3414b67", size = 43821, upload-time = "2019-01-29T15:22:04.986Z" }
 
 [[package]]
 name = "truststore"
