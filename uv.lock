@@ -471,9 +471,21 @@ wheels = [
 ]
 
 [[package]]
+name = "cta-kernel"
+version = "0.1.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/b6/8c/1ee2c4541178d7a5313a7d070497538c30ae9e43d24769e76625ab953d99/cta_kernel-0.1.0.tar.gz", hash = "sha256:6cd15f00ab5a5b91f0c8fc92b0480be714fa0e8ab1a7be2f4a440b669fa25bae", size = 63449, upload-time = "2026-08-10T11:32:50.439Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/dd/a1/73dd617114d738465c65500bfe55ee54d9b9b4094f563511f8f765b82979/cta_kernel-0.1.0-py3-none-any.whl", hash = "sha256:207738355780a3d6500728cac615867d017dd4963ec4fafeb26c27bcb2e3ac7c", size = 77344, upload-time = "2026-08-10T11:29:23.55Z" },
+]
+
+[[package]]
 name = "cta-orange"
 version = "0.1.0"
 source = { virtual = "." }
+dependencies = [
+    { name = "cta-kernel" },
+]
 
 [package.dev-dependencies]
 dev = [
@@ -489,6 +501,7 @@ dev = [
 ]
 
 [package.metadata]
+requires-dist = [{ name = "cta-kernel", specifier = "==0.1.0" }]
 
 [package.metadata.requires-dev]
 dev = [
