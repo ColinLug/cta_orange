@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 
-LOAD_WIDGET = Path(__file__).parents[1] / "src" / "widgets" / "load.py"
+LOAD_WIDGET = Path(__file__).parents[1] / "src" / "cta_orange" / "widgets" / "load.py"
 LEGACY_HELPER_NAMESPACE = "orangecta.cta_kernel.helpers"
 
 
@@ -18,7 +18,7 @@ if LEGACY_HELPER_NAMESPACE in LOAD_WIDGET.read_text(encoding="utf-8"):
         allow_module_level=True,
     )
 
-from widgets.load import *  # noqa: E402,F403
+from cta_orange.widgets.load import *  # noqa: E402,F403
 
 
 def test_output():
