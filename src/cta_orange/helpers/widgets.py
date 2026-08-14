@@ -8,6 +8,7 @@ from uuid import uuid4
 
 from cta_orange.helpers.ref import CTARef
 from cta_orange.helpers.session import CTASession
+from cta_kernel.errors import AdmissibilityError
 
 # Keep helper imports usable in headless tests and non-Orange environments.
 try:
@@ -146,12 +147,29 @@ class _OWCTAKernelMixin:
         self._logic._send_ref = self._send_ref  # type: ignore[method-assign]
 
         # Preserve current Orange failure behavior while clearing stale outputs.
+        # try:
+        #     return self._logic.commit()
+        # except Exception as exc:  # noqa: BLE001
+        #     self.error(f"Computation failed: {exc}")
+        #     self._send_none()
+        #     return None
+
         try:
-            return self._logic.commit()
+            ev = self._logic.commit()
+        except AdmissibilityError as exc:
+            violations = exc.context.get("violations", [])
+            details = "; ".join(
+                f"[{v.code}]" + (f" node={v.node_id}: " if v.node_id else " ") + v.message
+                for v in violations
+            )
+            self.error(f"Graph is not admissible: {details or exc.message}")
+            self._send_none()
+            return None
         except Exception as exc:  # noqa: BLE001
             self.error(f"Computation failed: {exc}")
             self._send_none()
             return None
+        return self._logic.commit()
 
     def onDeleteWidget(self) -> None:
         """Remove authored state before delegating widget deletion to Orange."""

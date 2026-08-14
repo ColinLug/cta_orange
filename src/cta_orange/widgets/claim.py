@@ -219,10 +219,11 @@ class OrangeCTAClaim(OWCTAKernelBase):
             dict[str, Any]: The parameters recorded onto the GraphSpec.
         """
         # Parameters are recorded into the GraphSpec and influence caching.
+        self.mode=self.mode.lower()
         params = {"mode": self.mode}
-        if self.mode == "Threshold":
+        if self.mode == "threshold":
             params["theta"] = float(self.theta)
-        elif self.mode == "Compare":
+        elif self.mode == "compare":
             params["delta0"] = float(self.delta)
         return params
 
@@ -258,10 +259,9 @@ class OrangeCTAClaim(OWCTAKernelBase):
         Returns:
             dict[str, Optional[CTARef]]: the ref to the evidences used for the sweep
         """
-        list_ref_ids = self._logic.session.store.list_ids()
+        list_evidences= self._logic.session.all_evidence()
         ev_str_store = None
-        for ref_id in list_ref_ids:
-            ev = self._logic.session.store.get(ref_id)
+        for ev in list_evidences:
             if ev.type_id == "StringStore":
                 ev_str_store = CTARef.from_evidence(
                     session_id=self._logic.session.session_id,

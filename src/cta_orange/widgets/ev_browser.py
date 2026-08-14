@@ -8,6 +8,7 @@ from AnyQt.QtWidgets import QTextBrowser
 from Orange.widgets import gui
 from Orange.widgets.settings import Setting
 from Orange.widgets.widget import Input, OWWidget
+from cta_kernel.runtime.evidence import Evidence
 
 from cta_orange.helpers.ref import CTARef
 from cta_orange.helpers.session import CTASession
@@ -92,7 +93,7 @@ class EvidenceBrowserCTA(OWWidget):
         else:
             self.prevEvBox.setVisible(False)
 
-    def formatEvidence(self, ref_ev: str, displayPayload: bool = True):
+    def formatEvidence(self, ev: Evidence, displayPayload: bool = True):
         """Format a string representation of one evidence entry for display.
 
         Args:
@@ -102,7 +103,6 @@ class EvidenceBrowserCTA(OWWidget):
         Returns:
             str: The formatted string to be displayed
         """
-        ev = self.session.store.get(ref_ev)
         str_ev = (
             "Evidence ID:\n    " + _truncate(ev.evidence_id) + "\n" "-" * 35 + "\n\n"
         )
@@ -135,12 +135,13 @@ class EvidenceBrowserCTA(OWWidget):
         # Set the text inside the widget to display the connected/received ref
         self.browser.clear()
         if self.ref:
-            str_ev = self.formatEvidence(self.ref.evidence_id)
+            str_ev = self.formatEvidence(self.session.evidence(self.ref))
             self.browser.append(str_ev)
 
         # Set the text inside the widget to display all sessions ref
         if self.displayBool and self.session is not None and self.ref is not None:
             self.browserPrev.clear()
-            list_ref_ids = self.session.store.list_ids()
-            parts = [self.formatEvidence(ref_id) for ref_id in list_ref_ids if ref_id != self.ref.evidence_id]
+            list_evidences = self.session.all_evidence()
+            print(list_evidences, list_evidences[0])
+            parts = [self.formatEvidence(ev) for ev in list_evidences if ev != self.session.evidence(self.ref)]
             self.browserPrev.setPlainText("".join(parts))

@@ -119,7 +119,7 @@ class CTASegmentation(OWCTAKernelBase):
             dict[str, Any]: The parameters recorded onto the GraphSpec.
         """
         # Parameters are recorded into the GraphSpec and influence caching.
-        params = {"policy_id": 0, "mode": self.mode}
+        params = {"mode": self.mode}
         if self.mode == "delimiter":
             params["delimiter"] = self.delimiter
         return params

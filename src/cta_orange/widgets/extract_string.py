@@ -39,9 +39,11 @@ class ExtractStringsCTA(OWCTAKernelBase):
     op_id = "BuildStringStore"
     out_port = "string_store"
 
+    kinds=["none", "strip", "lower", "nfkc", "emoji_strip_skin_tone"]
+
     string_col = Setting("")
     source_id_cols = Setting("")
-    normalization_policy = Setting("None")
+    normalization_policy = Setting(0)
 
     want_main_area = False
     resizing_enabled = False
@@ -100,7 +102,7 @@ class ExtractStringsCTA(OWCTAKernelBase):
             orientation="horizontal",
             label="Normalization policy :",
             labelWidth=150,
-            items=["None", "strip", "lower", "nfkc", "emoji_strip_skin_tone"],
+            items=self.kinds,
             # callback=self.sendButton.settingsChanged,
             tooltip=("The normalization policy to use."),
         )
@@ -138,9 +140,7 @@ class ExtractStringsCTA(OWCTAKernelBase):
         return {
             "string_col": self.string_col,
             "source_id_cols": sources_list,
-            "normalization_policy": {"kind": self.normalization_policy}
-            if self.normalization_policy
-            else None,  # Est-ce correct?
+            "normalization_policy": {"kind": self.kinds[self.normalization_policy]}
         }
 
     def _collect_inputs(self) -> dict[str, CTARef | None]:
