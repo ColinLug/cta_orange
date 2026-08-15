@@ -2,6 +2,7 @@
 a table's column."""
 
 from typing import Any
+from zipapp import create_archive
 
 import numpy as np
 from Orange.data import ContinuousVariable, Domain, StringVariable, Table
@@ -11,6 +12,7 @@ from Orange.widgets.widget import Input, Output
 from cta_orange.helpers.ref import CTARef
 from cta_orange.helpers.session import CTASession
 from cta_orange.helpers.widgets import OWCTAKernelBase
+from cta_orange.helpers.orange_datatable import create_orange_datatable
 
 class ExtractStringsCTA(OWCTAKernelBase):
     """Widget that extracts distinct strings from a table column into a string store."""
@@ -205,27 +207,8 @@ class ExtractStringsCTA(OWCTAKernelBase):
             ev = self._logic.session.evidence(ev_ref)
             # Récupération de la raw_table puis transformation en Table d'Orange
             payload = ev.payload
-            # Check if the table is empty
-            if payload["strings"]:
-                # Création du domaine pour la Table de Orange
-                metas = [
-                    ContinuousVariable("string_id"),
-                    StringVariable("string"),
-                    ContinuousVariable("count"),
-                ]
-                domain = Domain(attributes=[], metas=metas)
-
-                # Création de la Table
-                metas_array = np.array(
-                    [
-                        [string[key] for key in string]
-                        for string in payload["strings"]
-                    ],
-                    dtype=object,
-                )
-                data_table = Table.from_numpy(
-                    domain, X=np.empty((len(payload["strings"]), 0)), metas=metas_array
-                )
+            if payload:
+                data_table = create_orange_datatable(payload["strings"], ["string_id", "string", "count"])
                 self.Outputs.data_table.send(data_table)
                 return True
         self.Outputs.data_table.send(None)

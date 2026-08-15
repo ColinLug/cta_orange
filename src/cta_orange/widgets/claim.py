@@ -12,6 +12,7 @@ from Orange.widgets.widget import Input, Output
 from cta_orange.helpers.ref import CTARef
 from cta_orange.helpers.session import CTASession
 from cta_orange.helpers.widgets import OWCTAKernelBase
+from cta_orange.helpers.orange_datatable import create_orange_datatable
 
 
 def _single_line(text: str) -> str:
@@ -294,47 +295,16 @@ class OrangeCTAClaim(OWCTAKernelBase):
         if ev.type_id == "Table":
             ev = self._logic.session.evidence(ref)
             payload = ev.payload
-            # Check if the table is empty
-            if payload["rows"]:
-                metas = []
-                metas_array = []
-                if payload["meta"]["K"] == 2:
-                    columns = [
-                        c
-                        for c in payload["columns"]
-                        if c not in ["alpha_cap", "alpha_mult"]
-                    ]
-                else:
-                    columns = payload["columns"][:]
-                # Check if it's possible to convert to float a column
-                for _, col in enumerate(columns):
-                    values = [row[col] for row in payload["rows"]]
-                    if isinstance(values[0], (float, int)) and not isinstance(
-                        values[0], bool
-                    ):
-                        metas.append(ContinuousVariable(col))
-                    else:
-                        metas.append(StringVariable(col))
-
-                # Create the domain
-                domain = Domain(attributes=[], metas=metas)
-                # Création de la Table
-                metas_array = np.array(
-                    [
-                        [row[col] for col in columns]
-                        for row in payload["rows"]
-                        # if isinstance(row[col], str)
-                        # else round(row[col], 8)
-                        # for col in payload["columns"]
-                    ],
-                    dtype=object,
-                )
-                data_table = Table.from_numpy(
-                    domain, X=np.empty((len(payload["rows"]), 0)), metas=metas_array
-                )
-                self.Outputs.data_table.send(data_table)
+            if payload["meta"]["K"] == 2:
+                columns = [
+                    c
+                    for c in payload["columns"]
+                    if c not in ["alpha_cap", "alpha_mult"]
+                ]
             else:
-                self.Outputs.data_table.send(None)
+                columns = payload["columns"][:]
+            data_table = create_orange_datatable(payload["rows"], columns)
+            self.Outputs.data_table.send(data_table)
         else:
             self.Outputs.cta_data.send((self._logic.session, ref))
             # Clear (compact) UI fields.
@@ -459,14 +429,3 @@ class OrangeCTAClaim(OWCTAKernelBase):
         # Resolve the output evidence and emit a CTARef.
         out_ref = self._logic.session.output_ref(self._logic.node_id, port="table")
         return self._send_ref(out_ref)
-
-
-# def connect_auto_resize(text_edit):
-#     """_summary_
-
-#     Args:
-#         text_edit (_type_): _description_
-#     """
-#     text_edit.document().documentLayout().documentSizeChanged.connect(
-#         lambda size: text_edit.setMaximumHeight(int(size.height()) + 2)
-#     )

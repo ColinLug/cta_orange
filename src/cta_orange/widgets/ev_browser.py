@@ -104,7 +104,7 @@ class EvidenceBrowserCTA(OWWidget):
             str: The formatted string to be displayed
         """
         str_ev = (
-            "Evidence ID:\n    " + _truncate(ev.evidence_id) + "\n" "-" * 35 + "\n\n"
+            "Evidence ID:\n    " + _truncate(ev.evidence_id) + "\n" +"-" * 35 + "\n\n"
         )
         str_ev += (
             "Origin node ID:\n    "

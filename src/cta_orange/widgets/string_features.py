@@ -16,6 +16,7 @@ from Orange.widgets.widget import Input, Output
 from cta_orange.helpers.ref import CTARef
 from cta_orange.helpers.session import CTASession
 from cta_orange.helpers.widgets import OWCTAKernelBase
+from cta_orange.helpers.orange_datatable import create_orange_datatable
 
 
 class CTAStringsFeatures(OWCTAKernelBase):
@@ -157,82 +158,8 @@ class CTAStringsFeatures(OWCTAKernelBase):
             ev = self._logic.session.evidence(ev_ref)
             # Récupération de la raw_table puis transformation en Table d'Orange
             payload = ev.payload
-            # Check if the table is empty
-            if payload["rows"]:
-                metas = []
-
-                # Check if it's possible to convert to float a column
-                for i, col in enumerate(payload["columns"]):
-                    values = [row[col] for row in payload["rows"]]
-                    if isinstance(values[0], (float, int)) and not isinstance(
-                        values[0], bool
-                    ):
-                        metas.append(ContinuousVariable(col))
-                    else:
-                        metas.append(StringVariable(col))
-
-                # Create the domain
-                domain = Domain(attributes=[], metas=metas)
-
-                # Création de la Table
-                metas_array = np.array(
-                    [
-                        [row[col] for col in payload["columns"]]
-                        for row in payload["rows"]
-                        # if isinstance(row[col], str)
-                        # else round(row[col], 8)
-                        # for col in payload["columns"]
-                    ],
-                    dtype=object,
-                )
-                data_table = Table.from_numpy(
-                    domain, X=np.empty((len(payload["rows"]), 0)), metas=metas_array
-                )
-                self.Outputs.data_table.send(data_table)
-                return True
+            data_table = create_orange_datatable(payload["rows"], payload["columns"])
+            self.Outputs.data_table.send(data_table)
+            return True
         self.Outputs.data_table.send(None)
         return True
-        # LPC: Declare segmentation node wired from store node.
-        # session_set_node(
-        #     self.session,
-        #     "features_<uuid8>",
-        #     "StringFeatures",
-        #     {},
-        #     inputs={
-        #         "strings": {
-        #             "upstream_node": "filter_<uuid8>",
-        #             "upstream_port": "string_view",
-        #         },
-        #     },
-        # )
-
-        # # LPC: Run and resolve output.
-        # features_ref = _run_node_and_make_ref(
-        #     self.session,
-        #     node_id="features_<uuid8>",
-        #     port="table",
-        #     kind="table",
-        # )
-        # ev = self.session.store.get(features_ref.evidence_id)
-        # display_text = _format_evidence_card(ev)
-        # print(display_text)
-        # # Récupération de la raw_table puis transformation en Table d'Orange
-        # payload = ev.payload
-
-        # # Création du domaine pour la Table de Orange
-        # metas = [StringVariable(col) for col in payload["columns"]]
-        # domain = Domain(attributes=[], metas=metas)
-
-        # # Création de la Table
-        # metas_array = np.array(
-        #     [[row[col] for col in payload["columns"]] for row in payload["rows"]],
-        #     dtype=object,
-        # )
-        # data_table = Table.from_numpy(
-        #     domain, X=np.empty((len(payload["rows"]), 0)), metas=metas_array
-        # )
-
-        # self.Outputs.session.send(self.session)
-        # self.Outputs.ref.send(features_ref)
-        # self.Outputs.data_table.send(data_table)
-        # return self.session, features_ref

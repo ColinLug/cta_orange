@@ -18,6 +18,7 @@ from Orange.widgets.widget import Output
 from cta_orange.helpers.ref import CTARef
 from cta_orange.helpers.session import CTASession
 from cta_orange.helpers.widgets import OWCTAKernelBase
+from cta_orange.helpers.orange_datatable import create_orange_datatable
 
 
 # pylint: disable=too-many-instance-attributes
@@ -193,40 +194,9 @@ class LoadTSVFile(OWCTAKernelBase):
         ev_ref = super().handleNewSignals()
         ev = self._logic.session.evidence(ev_ref)
         if ev:
-            # Get raw_table and transformation it in an Orange Table
             payload = ev.payload
-            # Check if the table is empty
-            if payload["rows"]:
-                metas = []
-                metas_array = []
-
-                # Check if it's possible to convert to float a column
-                for _, col in enumerate(payload["columns"]):
-                    values = [row[col] for row in payload["rows"]]
-                    if isinstance(values[0], (float, int)) and not isinstance(
-                        values[0], bool
-                    ):
-                        metas.append(ContinuousVariable(col))
-                    else:
-                        metas.append(StringVariable(col))
-
-                # Domain creation
-                domain = Domain(attributes=[], metas=metas)
-
-                # Table creation
-                metas_array = np.array(
-                    [
-                        [row[col] for col in payload["columns"]]
-                        for row in payload["rows"]
-                        # if isinstance(row[col], str)
-                        # else round(row[col], 8)
-                        # for col in payload["columns"]
-                    ],
-                    dtype=object,
-                )
-                data_table = Table.from_numpy(
-                    domain, X=np.empty((len(payload["rows"]), 0)), metas=metas_array
-                )
+            if payload:
+                data_table = create_orange_datatable(payload["rows"], payload["columns"])
                 self.Outputs.data_table.send(data_table)
                 return True
         self.Outputs.data_table.send(None)
