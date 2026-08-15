@@ -14,10 +14,11 @@ Only if running sensitivity check
 ## Description
 This is the final widget of the workflow. Its purpose is to determine whether a claim can be scientifically validated by the data and its sources.
 ### Interface
+![An image of the widget's basic interface](photos/claim_interface.png)
 #### Options
 - **Mode**: `Compare` or `Threshold`. Determines which of the two parameters below is used and how many upstream Proportion widgets are required.
-- **θ (theta)**: threshold value used in `Threshold` mode. The scalar input must exceed this value.
 - **δ₀ (delta)**: minimum margin required between the two scalar inputs in `Compare` mode.
+- **θ (theta)**: threshold value used in `Threshold` mode. The scalar input must exceed this value.
 - **Run source-weighting policy check**: launches a robustness sweep across source-weighting policies; results are shown as a Data Table output (see "Sensitivity check" below).
 - **Send**: Compute and deliver the claim in `Computed Result`
 #### Computed Result

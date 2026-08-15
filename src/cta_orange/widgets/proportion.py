@@ -65,7 +65,7 @@ class CTAProportion(OWCTAKernelBase):
             value="num_predicate",
             orientation="horizontal",
             label="Compute proportion where:",
-            labelWidth=180,
+            labelWidth=200,
             # callback=self.sendButton.settingsChanged,
             tooltip=("The conditions the strings shall meet to be counted."),
         )

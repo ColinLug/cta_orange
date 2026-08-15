@@ -62,7 +62,7 @@ class StringsFilter(OWCTAKernelBase):
             value="predicate",
             orientation="horizontal",
             label="Including strings where:",
-            labelWidth=150,
+            labelWidth=170,
             # callback=self.sendButton.settingsChanged,
             tooltip=("The conditions the strings shall meet to not be filtered out."),
         )
