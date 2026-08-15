@@ -220,11 +220,11 @@ class OrangeCTAClaim(OWCTAKernelBase):
             dict[str, Any]: The parameters recorded onto the GraphSpec.
         """
         # Parameters are recorded into the GraphSpec and influence caching.
-        self.mode=self.mode.lower()
-        params = {"mode": self.mode}
-        if self.mode == "threshold":
+        low_mode =self.mode.lower()
+        params = {"mode": low_mode}
+        if low_mode == "threshold":
             params["theta"] = float(self.theta)
-        elif self.mode == "compare":
+        elif low_mode == "compare":
             params["delta0"] = float(self.delta)
         return params
 
