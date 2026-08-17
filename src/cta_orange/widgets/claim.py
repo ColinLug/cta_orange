@@ -226,6 +226,7 @@ class OrangeCTAClaim(OWCTAKernelBase):
             params["theta"] = float(self.theta)
         elif low_mode == "compare":
             params["delta0"] = float(self.delta)
+
         return params
 
     def _params_sweep(self) -> dict[str, Any]:
@@ -308,10 +309,7 @@ class OrangeCTAClaim(OWCTAKernelBase):
         else:
             self.Outputs.cta_data.send((self._logic.session, ref))
             # Clear (compact) UI fields.
-            self.reasonsLineEdit.clear()
-            self.statusLineEdit.clear()
-            self.mismatchLineEdit.clear()
-            self.missingLineEdit.clear()
+            self.clearLines()
             if ev.payload:
                 reasons_full = "\n".join(ev.payload.get("reasons") or [])
                 reasons_line = _single_line(reasons_full)
@@ -374,12 +372,15 @@ class OrangeCTAClaim(OWCTAKernelBase):
             Optional[CTARef]: None if no upstream, the ref to evidence otherwise
         """
         self.error()
-        self.warning()
+        self.information()
+        self.clearLines()
         # Check the upstream is linked
-        if self.scalar_a is None or self.scalar_b is None or self._logic.session is None:
+        if self.scalar_a is None or self._logic.session is None:
             self.error("Upstream data(s) are not connected.")
             self._send_none()
             return None
+        if self.scalar_b is None and self.mode == "Compare":
+            self.information("Don't forget to provide an other scalar.")
         ev_ref = super().handleNewSignals()
         return ev_ref
 
@@ -392,21 +393,29 @@ class OrangeCTAClaim(OWCTAKernelBase):
             self.delimiterLineTheta.setVisible(False)
             self.delimiterLineDelta.setVisible(True)
 
+    def clearLines(self):
+        """Clear the widgets lines"""
+        self.reasonsLineEdit.clear()
+        self.statusLineEdit.clear()
+        self.mismatchLineEdit.clear()
+        self.missingLineEdit.clear()
+
     def robustnessSweep(self):
         """Makes a robustness sweep
 
         Returns:
             CTARef: a reference to the data table produced
         """
+        sweep_node_id = self._logic.node_id + "_sweep"
         self.error()
         self.warning()
         if self.scalar_a is None or self.scalar_b is None or self._logic.session is None:
-            self.error("Upstream data(s) are not connected.")
+            self.error("Upstream data are not connected.")
             return None
         inputs = self._collect_inputs_sweep()
         # make the operation only when the button is clicked
         self._logic.session.registry.upsert_node(
-            self._logic.node_id,
+            sweep_node_id,
             op_id="RobustnessSweepCapContinuum",
             params=self._params_sweep(),
         )

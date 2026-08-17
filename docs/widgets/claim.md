@@ -32,8 +32,10 @@ robustness sweep, independent from the main Send button. It checks
 how the claim's outcome would change under a grid of source-weighting
 policies, and displays the result as a table on the Data Table output.
 ## Messages
+### Informations
+-  **Don't forget to provide an other scalar.**: shown when the second scalar (the b one) is missing and the mode is "Compare".
 ### Errors
-- **Upstream data(s) are not connected.**: shown when one or both scalars are missing.
+- **Upstream data are not connected.**: shown when no inputs as scalar_a has been linked.
 - **Sweep failed**: shown when the robustness sweep raises an exception.
 ## Example
 See the linked example [file](https://github.com/ColinLug/cta_orange/blob/main/examples/example_workflow.ows) for use.
