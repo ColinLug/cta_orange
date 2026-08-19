@@ -380,7 +380,7 @@ class OrangeCTAClaim(OWCTAKernelBase):
             self._send_none()
             return None
         if self.scalar_b is None and self.mode == "Compare":
-            self.information("Don't forget to provide an other scalar.")
+            self.information("Don't forget to provide another scalar.")
         ev_ref = super().handleNewSignals()
         return ev_ref
 
