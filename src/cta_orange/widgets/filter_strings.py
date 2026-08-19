@@ -159,27 +159,3 @@ class StringsFilter(OWCTAKernelBase):
         #     self.warning("Predicate is very long. It can cause slowness or issues. Consider providing a shorter predicate.")
         ev_ref = super().handleNewSignals()
         return ev_ref
-        # LPC: Declare segmentation node wired from store node.
-        # session_set_node(
-        #     self.session,
-        #     "filter_<uuid8>",
-        #     "FilterStrings",
-        #     {"predicate": self.predicate},
-        #     inputs={
-        #         "strings": {
-        #             "upstream_node": "seg",
-        #             "upstream_port": "string_view",
-        #         },
-        #     },
-        # )
-
-        # # LPC: Run and resolve output.
-        # filter_ref = _run_node_and_make_ref(
-        #     self.session,
-        #     node_id="filter_<uuid8>",
-        #     port="string_view",
-        #     kind="string_view",
-        # )
-        # self.Outputs.session.send(self.session)
-        # self.Outputs.ref.send(filter_ref)
-        # return self.session, filter_ref
