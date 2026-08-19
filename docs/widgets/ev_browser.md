@@ -1,4 +1,4 @@
-# Claim widget documentation
+# Evidence browser widget documentation
 <img src="../../src/cta_orange/widgets/icons/evidence_browser.png" alt="A pixel-art image of a violet eye" width="64px"/>
 
 Let the user see the previous evidence(s) of an `CTA Orange` widget

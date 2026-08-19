@@ -135,7 +135,7 @@ class StringsFilter(OWCTAKernelBase):
             Optional[CTARef]: None if no upstream or invalid predicate, the ref to the evidence otherwise
         """
         self.error()
-        self.warning()
+        self.information()
         # Check the upstream is linked
         if self.ref is None or self._logic.session is None:
             self.error("No upstream data connected.")
@@ -144,7 +144,7 @@ class StringsFilter(OWCTAKernelBase):
 
         # Check if predicate is empty
         if not self.predicate.strip():
-            self.warning("No predicate configured yet.")
+            self.information("No predicate configured yet.")
             self._send_none()
             return None
 

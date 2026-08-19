@@ -1,4 +1,4 @@
-# Claim widget documentation
+# Extract strings widget documentation
 <img src="../../src/cta_orange/widgets/icons/extract_strings.png" alt="A pixel-art image of a text-file being ruptured" width="64px"/>
 
 Extract strings from a table.
@@ -12,7 +12,7 @@ A group of the ref to the evidence created, here a string store, and the session
 - `Data Table`\
 An Orange data table to visualize the created string store output.
 ## Description
-This is the final widget of the workflow. Its purpose is to determine whether a claim can be scientifically validated by the data and its sources.
+This widget extracts strings from a given column of a table imported via the `LoadTSV` widget and builds a string store.
 ### Interface
 ![An image of the widget's basic interface](photos/extract_strings_interface.png)
 #### Importation's mode
