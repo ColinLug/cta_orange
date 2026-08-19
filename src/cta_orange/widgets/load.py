@@ -179,7 +179,7 @@ class LoadTSVFile(OWCTAKernelBase):
         """
         # Check si le chemin est bon (et est un .tsv)
         self.error()
-        self.warning()
+        self.information()
         if not Path(self.path).exists():
             self.error("Please provide a valid path.")
             self._send_none()
@@ -210,8 +210,8 @@ class LoadTSVFile(OWCTAKernelBase):
             dict[str, Any]: The scope to use to create a session.
         """
         if not self.dataset_id:
-            self.warning("Dataset ID is empty. Don't forget to annotate it.")
-        else: self.warning()
+            self.information("Dataset ID is empty. Don't forget to annotate it.")
+        else: self.information()
         scope = {
             "dataset_id": self.dataset_id,
             "slice_id": self.slice_id,
