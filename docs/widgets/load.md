@@ -1,4 +1,4 @@
-# Filter strings widget documentation
+# Load widget documentation
 <img src="../../src/cta_orange/widgets/icons/load.png" alt="A pixel-art image text-file being imported" width="64px"/>
 
 Import a `.TSV` file and create a session.

@@ -1,4 +1,4 @@
-# Extract strings widget documentation
+# Proportion widget documentation
 <img src="../../src/cta_orange/widgets/icons/proportion.png" alt="A pixel-art image of a left tilted scale." width="64px"/>
 
 Compute a proportion of strings following a certain predicate.

@@ -176,24 +176,3 @@ class CTASegmentation(OWCTAKernelBase):
             return None
         ev_ref = super().handleNewSignals()
         return ev_ref
-        # LPC: Declare segmentation node wired from store node.
-        # session_set_node(
-        #     self.session,
-        #     "seg",
-        #     "Segmentation",
-        #     {"policy_id": 0, "mode": self.mode},
-        #     inputs={
-        #         "strings": {
-        #             "upstream_node": "store",
-        #             "upstream_port": "string_store",
-        #         },
-        #     },
-        # )
-
-        # # LPC: Run and resolve output.
-        # seg_ref = _run_node_and_make_ref(
-        #     self.session, node_id="seg", port="string_view", kind="string_view"
-        # )
-        # self.Outputs.session.send(self.session)
-        # self.Outputs.ref.send(seg_ref)
-        # return self.session, seg_ref
