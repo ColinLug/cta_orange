@@ -249,10 +249,12 @@ class OrangeCTAClaim(OWCTAKernelBase):
             dict[str, Optional[CTARef]]: the ref to the proportions received upstream.
         """
         self._logic.session.registry.clear_input(self._logic.node_id, "string_store")
-        return {
+        params ={
             "scalar_A": self.scalar_a,
-            "scalar_B": self.scalar_b if self.scalar_b else None,
         }
+        if self.scalar_b:
+            params["scalar_B"]= self.scalar_b
+        return params
 
     def _collect_inputs_sweep(self) -> dict[str, Optional[CTARef]]:
         """
@@ -271,11 +273,13 @@ class OrangeCTAClaim(OWCTAKernelBase):
                     port="string_store",
                     evidence=ev,
                 )
-        return {
+        params ={
             "string_store": ev_str_store,
             "scalar_A": self.scalar_a,
-            "scalar_B": self.scalar_b if self.scalar_b else None,
         }
+        if self.scalar_b:
+            params["scalar_B"]= self.scalar_b
+        return params
 
     def _send_none(self) -> None:
         """Clear outputs of the claim widget"""
