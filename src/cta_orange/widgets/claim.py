@@ -423,18 +423,19 @@ class OrangeCTAClaim(OWCTAKernelBase):
         for input_name, ref in inputs.items():
             if ref is None:
                 self._logic.session.registry.clear_input(
-                    self._logic.node_id, input_name
+                    sweep_node_id, input_name
                 )
             else:
                 self._logic.session.registry.set_input(
-                    self._logic.node_id, input_name, ref
+                    sweep_node_id, input_name, ref
                 )
         # Execute the kernel for the closure needed to compute this node.
         try:
-            self._logic.session.ensure_computed(self._logic.node_id)
+            self._logic.session.ensure_computed(sweep_node_id)
         except Exception as exc:
             self.error(f"Sweep failed: {exc}")
+            print(exc.context.get("violations"))
             return None
         # Resolve the output evidence and emit a CTARef.
-        out_ref = self._logic.session.output_ref(self._logic.node_id, port="table")
+        out_ref = self._logic.session.output_ref(sweep_node_id, port="table")
         return self._send_ref(out_ref)
