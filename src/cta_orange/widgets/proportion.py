@@ -7,7 +7,6 @@ from Orange.widgets import gui
 from Orange.widgets.settings import Setting
 from Orange.widgets.widget import Input, Output
 
-from cta_kernel.operators.predicate_dsl import parse_predicate
 from cta_orange.helpers.ref import CTARef
 from cta_orange.helpers.session import CTASession
 from cta_orange.helpers.widgets import OWCTAKernelBase
@@ -153,12 +152,5 @@ class CTAProportion(OWCTAKernelBase):
             self._send_none()
             return None
 
-        # Check the validity of the predicate
-        try:
-            parse_predicate(self.num_predicate)
-        except ValueError as exc:
-            self.error(f"Invalid predicate: {exc}")
-            self._send_none()
-            return None
         ev_ref = super().handleNewSignals()
         return ev_ref

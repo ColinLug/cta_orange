@@ -6,7 +6,6 @@ from Orange.widgets import gui
 from Orange.widgets.settings import Setting
 from Orange.widgets.widget import Input, Output
 
-from cta_kernel.operators.predicate_dsl import parse_predicate
 from cta_orange.helpers.ref import CTARef
 from cta_orange.helpers.session import CTASession
 from cta_orange.helpers.widgets import OWCTAKernelBase
@@ -148,13 +147,6 @@ class StringsFilter(OWCTAKernelBase):
             self._send_none()
             return None
 
-        # Check the validity of the predicate
-        try:
-            parse_predicate(self.predicate)
-        except ValueError as exc:
-            self.error(f"Invalid predicate: {exc}")
-            self._send_none()
-            return None
         # if len(self.predicate) > 200:
         #     self.warning("Predicate is very long. It can cause slowness or issues. Consider providing a shorter predicate.")
         ev_ref = super().handleNewSignals()
