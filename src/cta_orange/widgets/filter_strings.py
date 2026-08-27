@@ -65,7 +65,7 @@ class StringsFilter(OWCTAKernelBase):
             # callback=self.sendButton.settingsChanged,
             tooltip=("The conditions the strings shall meet to not be filtered out."),
         )
-        sendButton = gui.button(
+        gui.button(
             widget=self.controlArea,
             master=self,
             label="Send",

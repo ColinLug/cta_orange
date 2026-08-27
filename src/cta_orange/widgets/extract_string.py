@@ -110,7 +110,7 @@ class ExtractStringsCTA(OWCTAKernelBase):
         )
         gui.separator(widget=self.controlArea, width=5)
         gui.rubber(self.controlArea)
-        sendButton = gui.button(
+        gui.button(
             widget=self.controlArea,
             master=self,
             label="Send",

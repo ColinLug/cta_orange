@@ -76,7 +76,7 @@ class CTAStringsFeatures(OWCTAKernelBase):
             valueType=int,
             validator=QIntValidator(1,9999999),
         )
-        sendButton = gui.button(
+        gui.button(
             widget=self.controlArea,
             master=self,
             label="Send",

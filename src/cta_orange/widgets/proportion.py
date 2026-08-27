@@ -70,7 +70,7 @@ class CTAProportion(OWCTAKernelBase):
         )
         gui.separator(widget=basicBox, width=3)
         gui.rubber(self.controlArea)
-        sendButton = gui.button(
+        gui.button(
             widget=self.controlArea,
             master=self,
             label="Send",

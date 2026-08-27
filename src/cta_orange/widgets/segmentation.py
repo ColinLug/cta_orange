@@ -86,7 +86,7 @@ class CTASegmentation(OWCTAKernelBase):
             tooltip=("The delimiter to use for cutting strings."),
         )
         gui.rubber(self.controlArea)
-        sendButton = gui.button(
+        gui.button(
             widget=self.controlArea,
             master=self,
             label="Send",
