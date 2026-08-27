@@ -9,16 +9,16 @@ import os
 from pathlib import Path
 from typing import Any
 
-import numpy as np
 from AnyQt.QtWidgets import QFileDialog
-from Orange.data import ContinuousVariable, Domain, StringVariable, Table
+from Orange.data import Table
 from Orange.widgets import gui
 from Orange.widgets.settings import Setting
 from Orange.widgets.widget import Output
+
+from cta_orange.helpers.orange_datatable import create_orange_datatable
 from cta_orange.helpers.ref import CTARef
 from cta_orange.helpers.session import CTASession
 from cta_orange.helpers.widgets import OWCTAKernelBase
-from cta_orange.helpers.orange_datatable import create_orange_datatable
 
 
 # pylint: disable=too-many-instance-attributes

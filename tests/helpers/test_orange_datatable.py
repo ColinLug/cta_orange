@@ -1,8 +1,8 @@
-from tokenize import String
 
 from Orange.data import ContinuousVariable, StringVariable
 
 from cta_orange.helpers.orange_datatable import create_orange_datatable
+
 
 def test_create_orange_datatable_infers_types():
     """Check the correctness of types, length and creation of the Orange datatable"""

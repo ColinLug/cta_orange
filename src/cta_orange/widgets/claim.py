@@ -1,18 +1,17 @@
 """Orange Canvas Widget for the CTA's module. It is the main result of the workflow.
 Helps to claim facts about the corpus from upstream evidences."""
 
-from typing import Any, Optional
+from typing import Any
 
-import numpy as np
-from Orange.data import ContinuousVariable, Domain, StringVariable, Table
+from Orange.data import Table
 from Orange.widgets import gui
 from Orange.widgets.settings import Setting
 from Orange.widgets.widget import Input, Output
 
+from cta_orange.helpers.orange_datatable import create_orange_datatable
 from cta_orange.helpers.ref import CTARef
 from cta_orange.helpers.session import CTASession
 from cta_orange.helpers.widgets import OWCTAKernelBase
-from cta_orange.helpers.orange_datatable import create_orange_datatable
 
 
 def _single_line(text: str) -> str:
@@ -193,7 +192,7 @@ class OrangeCTAClaim(OWCTAKernelBase):
         self.setMaximumHeight(self.minimumSizeHint().height())
 
     @Inputs.scalar_a
-    def set_scalar_a(self, scalar_a: Optional[tuple]) -> None:
+    def set_scalar_a(self, scalar_a: tuple | None) -> None:
         """
         Receive the upstream CTAData : the session and a ref to the upstream proportion
         Session is set here
@@ -204,7 +203,7 @@ class OrangeCTAClaim(OWCTAKernelBase):
         self.scalar_a = ref
 
     @Inputs.scalar_b
-    def set_scalar_b(self, scalar_b: Optional[tuple]) -> None:
+    def set_scalar_b(self, scalar_b: tuple | None) -> None:
         """
         Receive the upstream CTAData : the session and a ref to the upstream proportion
         Session is *NOT* set here. Gets only the proportion.
@@ -240,7 +239,7 @@ class OrangeCTAClaim(OWCTAKernelBase):
         params = {"K": 2, "delta0": float(self.delta)}
         return params
 
-    def _collect_inputs(self) -> dict[str, Optional[CTARef]]:
+    def _collect_inputs(self) -> dict[str, CTARef | None]:
         """
         Collect wiring inputs for the operator call.
         Also clears any leftover from a previous sweep run
@@ -256,7 +255,7 @@ class OrangeCTAClaim(OWCTAKernelBase):
             params["scalar_B"]= self.scalar_b
         return params
 
-    def _collect_inputs_sweep(self) -> dict[str, Optional[CTARef]]:
+    def _collect_inputs_sweep(self) -> dict[str, CTARef | None]:
         """
         Collect wiring inputs for the sweep call.
 

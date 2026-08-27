@@ -1,10 +1,8 @@
-import pytest
-from pathlib import Path
-from Orange.widgets.tests.base import WidgetTest
 from unittest.mock import MagicMock, patch
 
-from cta_orange.widgets.load import LoadTSVFile
+from Orange.widgets.tests.base import WidgetTest
 
+from cta_orange.widgets.load import LoadTSVFile
 
 
 class TestLoadWidget(WidgetTest):

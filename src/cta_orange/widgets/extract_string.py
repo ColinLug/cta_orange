@@ -2,17 +2,17 @@
 a table's column."""
 
 from typing import Any
-from zipapp import create_archive
 
-import numpy as np
-from Orange.data import ContinuousVariable, Domain, StringVariable, Table
+from Orange.data import Table
 from Orange.widgets import gui
 from Orange.widgets.settings import Setting
 from Orange.widgets.widget import Input, Output
+
+from cta_orange.helpers.orange_datatable import create_orange_datatable
 from cta_orange.helpers.ref import CTARef
 from cta_orange.helpers.session import CTASession
 from cta_orange.helpers.widgets import OWCTAKernelBase
-from cta_orange.helpers.orange_datatable import create_orange_datatable
+
 
 class ExtractStringsCTA(OWCTAKernelBase):
     """Widget that extracts distinct strings from a table column into a string store."""

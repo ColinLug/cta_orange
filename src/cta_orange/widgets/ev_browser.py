@@ -2,13 +2,11 @@
 the evidences created by the widgets"""
 
 import json
-from typing import Optional
 
 from AnyQt.QtWidgets import QTextBrowser
-from Orange.widgets import gui
-from Orange.widgets.settings import Setting
-from Orange.widgets.widget import Input, OWWidget
 from cta_kernel.runtime.evidence import Evidence
+from Orange.widgets import gui
+from Orange.widgets.widget import Input, OWWidget
 
 from cta_orange.helpers.ref import CTARef
 from cta_orange.helpers.session import CTASession
@@ -45,7 +43,7 @@ class EvidenceBrowserCTA(OWWidget):
         """Manages the class creation. Basic UI is created here."""
         super().__init__()
         self.session = None
-        self.ref: Optional[CTARef] = None
+        self.ref: CTARef | None = None
         self.payloadCheck = gui.checkBox(
             widget=self.controlArea,
             master=self,
@@ -77,7 +75,7 @@ class EvidenceBrowserCTA(OWWidget):
         self.prevEvBox.setVisible(False)
 
     @Inputs.cta_data
-    def set_ctaData(self, cta_data: Optional[tuple]) -> None:  # noqa: D401
+    def set_ctaData(self, cta_data: tuple | None) -> None:
         """Receive the upstream CTAData : the session and a ref to the upstream claim"""
         # Store the new ref and trigger recomputation if possible.
         session, ref = cta_data if cta_data is not None else (None,None)

@@ -6,9 +6,10 @@ from dataclasses import dataclass
 from typing import Any
 from uuid import uuid4
 
+from cta_kernel.errors import AdmissibilityError
+
 from cta_orange.helpers.ref import CTARef
 from cta_orange.helpers.session import CTASession
-from cta_kernel.errors import AdmissibilityError
 
 # Keep helper imports usable in headless tests and non-Orange environments.
 try:
@@ -125,7 +126,7 @@ class _OWCTAKernelMixin:
     def _send_none(self) -> None:
         """Clear concrete widget outputs."""
 
-        return None
+        return
 
     def _send_ref(self, ref: CTARef) -> Any:
         """Emit a concrete widget output reference."""
@@ -135,7 +136,7 @@ class _OWCTAKernelMixin:
     def sendData(self) -> None:
         """Retain the legacy subclass hook used by current CTA Orange widgets."""
 
-        return None
+        return
 
     def handleNewSignals(self) -> Any:
         """Bind concrete hooks and execute one coalesced widget commit."""
@@ -149,7 +150,7 @@ class _OWCTAKernelMixin:
         # Preserve current Orange failure behavior while clearing stale outputs.
         # try:
         #     return self._logic.commit()
-        # except Exception as exc:  # noqa: BLE001
+        # except Exception as exc:
         #     self.error(f"Computation failed: {exc}")
         #     self._send_none()
         #     return None

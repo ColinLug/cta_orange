@@ -1,7 +1,7 @@
 """Orange Canvas Widget for the CTA's module. Calculates a proportion
 of strings from a predicate"""
 
-from typing import Any, Optional
+from typing import Any
 
 from Orange.widgets import gui
 from Orange.widgets.settings import Setting
@@ -47,7 +47,7 @@ class CTAProportion(OWCTAKernelBase):
     def __init__(self):
         """Manages the class creation. Basic UI is created here."""
         super().__init__()
-        self.ref: Optional[CTARef] = None
+        self.ref: CTARef | None = None
         basicBox = gui.widgetBox(
             widget=self.controlArea,
             box="Proportion",
@@ -81,7 +81,7 @@ class CTAProportion(OWCTAKernelBase):
         self.setFixedHeight(self.minimumSizeHint().height())
 
     @Inputs.cta_data
-    def set_ctaData(self, cta_data: Optional[tuple]) -> None:  # noqa: D401
+    def set_ctaData(self, cta_data: tuple | None) -> None:
         """Receive the upstream CTAData : the session and a ref to the upstream filtered strings"""
 
         # Store the new ref and trigger recomputation if possible.
@@ -99,7 +99,7 @@ class CTAProportion(OWCTAKernelBase):
         # Parameters are recorded into the GraphSpec and influence caching.
         return {"predicate": self.num_predicate, "mode": self.mode}
 
-    def _collect_inputs(self) -> dict[str, Optional[CTARef]]:
+    def _collect_inputs(self) -> dict[str, CTARef | None]:
         """
         Collect wiring inputs for the operator call.
 

@@ -466,31 +466,33 @@ name = "cta-orange"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "cta-kernel" },
-]
-
-[package.dev-dependencies]
-dev = [
     { name = "anyqt" },
+    { name = "cta-kernel" },
     { name = "numpy" },
     { name = "orange3" },
     { name = "pyqt6" },
     { name = "pyqt6-webengine" },
+]
+
+[package.dev-dependencies]
+dev = [
     { name = "pytest" },
     { name = "ruff" },
     { name = "setuptools" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "cta-kernel", specifier = "==0.1.0" }]
-
-[package.metadata.requires-dev]
-dev = [
+requires-dist = [
     { name = "anyqt", specifier = "==0.2.1" },
+    { name = "cta-kernel", specifier = "==0.1.0" },
     { name = "numpy", specifier = "==2.4.2" },
     { name = "orange3", specifier = "==3.39.0" },
     { name = "pyqt6", specifier = ">=6.11.0" },
     { name = "pyqt6-webengine", specifier = ">=6.11.0" },
+]
+
+[package.metadata.requires-dev]
+dev = [
     { name = "pytest", specifier = ">=9.1.1" },
     { name = "ruff", specifier = ">=0.16.0" },
     { name = "setuptools", specifier = "==65.5.0" },

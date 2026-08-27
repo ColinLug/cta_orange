@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from cta_orange.helpers import CTARef, GraphRegistry
 from cta_kernel.ir import EdgeRef
 
+from cta_orange.helpers import CTARef, GraphRegistry
 
 SCOPE = {"dataset_id": "helper-tests", "slice_id": "all"}
 

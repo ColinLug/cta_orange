@@ -26,12 +26,12 @@ from .load import LoadTSVFile
 
 # Orange utilise __all__ pour découvrir les widgets
 __all__ = [
-    "LoadTSVFile",
-    "ExtractStringsCTA",
+    "CTAProportion",
     "CTASegmentation",
     "CTAStringsFeatures",
-    "StringsFilter",
-    "CTAProportion",
+    "EvidenceBrowserCTA",
+    "ExtractStringsCTA",
+    "LoadTSVFile",
     "OrangeCTAClaim",
-    "EvidenceBrowserCTA"
+    "StringsFilter"
 ]

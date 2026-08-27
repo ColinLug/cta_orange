@@ -1,8 +1,9 @@
-import pytest
-from Orange.widgets.tests.base import WidgetTest
 from unittest.mock import MagicMock
 
+from Orange.widgets.tests.base import WidgetTest
+
 from cta_orange.widgets.segmentation import CTASegmentation
+
 
 class TestSegWidget(WidgetTest):
     """Tests for CTASegmentation."""

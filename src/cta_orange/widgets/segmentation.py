@@ -1,7 +1,7 @@
 """Orange Canvas Widget for the CTA's module. Segment the strings into chars,
 or using a certain delimiter"""
 
-from typing import Any, Optional
+from typing import Any
 
 from Orange.widgets import gui
 from Orange.widgets.settings import Setting
@@ -48,7 +48,7 @@ class CTASegmentation(OWCTAKernelBase):
     def __init__(self):
         """Manages the class creation. Basic UI is created here."""
         super().__init__()
-        self.ref: Optional[CTARef] = None
+        self.ref: CTARef | None = None
         basicBox = gui.widgetBox(
             widget=self.controlArea,
             box="Segmentation Options",
@@ -96,7 +96,7 @@ class CTASegmentation(OWCTAKernelBase):
         self.delimiterLine.setVisible(False)
 
     @Inputs.cta_data
-    def set_ctaData(self, cta_data: Optional[tuple]) -> None:
+    def set_ctaData(self, cta_data: tuple | None) -> None:
         """Receive the upstream CTAData : the session and a ref to the upstream strings store"""
 
         # Store the new ref and trigger recomputation if possible.
@@ -124,7 +124,7 @@ class CTASegmentation(OWCTAKernelBase):
             params["delimiter"] = self.delimiter
         return params
 
-    def _collect_inputs(self) -> dict[str, Optional[CTARef]]:
+    def _collect_inputs(self) -> dict[str, CTARef | None]:
         """
         Collect wiring inputs for the operator call.
 

@@ -5,11 +5,10 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
-
-from cta_orange.helpers import CTARef, CTASession
 from cta_kernel import KernelRuntime, RunResult
 from cta_kernel.errors import AdmissibilityError, OutputResolutionError
 
+from cta_orange.helpers import CTARef, CTASession
 
 FIXTURE = Path(__file__).parents[1] / "data" / "helper_runtime_fixture.tsv"
 SCOPE = {"dataset_id": "helper-tests", "slice_id": "all"}

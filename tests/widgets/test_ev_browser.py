@@ -1,6 +1,6 @@
-import pytest
-from Orange.widgets.tests.base import WidgetTest
 from unittest.mock import MagicMock
+
+from Orange.widgets.tests.base import WidgetTest
 
 from cta_orange.widgets.ev_browser import EvidenceBrowserCTA, _truncate
 

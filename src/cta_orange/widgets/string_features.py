@@ -4,19 +4,18 @@ Orange Canvas Widget for the CTA's module.
 Creates a Data Table of the imported segmented corpus strings.
 """
 
-from typing import Any, Optional
+from typing import Any
 
-import numpy as np
 from AnyQt.QtGui import QIntValidator
-from Orange.data import ContinuousVariable, Domain, StringVariable, Table
+from Orange.data import Table
 from Orange.widgets import gui
 from Orange.widgets.settings import Setting
 from Orange.widgets.widget import Input, Output
 
+from cta_orange.helpers.orange_datatable import create_orange_datatable
 from cta_orange.helpers.ref import CTARef
 from cta_orange.helpers.session import CTASession
 from cta_orange.helpers.widgets import OWCTAKernelBase
-from cta_orange.helpers.orange_datatable import create_orange_datatable
 
 
 class CTAStringsFeatures(OWCTAKernelBase):
@@ -54,7 +53,7 @@ class CTAStringsFeatures(OWCTAKernelBase):
     def __init__(self):
         """Manages the class creation. Basic UI is created here."""
         super().__init__()
-        self.ref: Optional[CTARef] = None
+        self.ref: CTARef | None = None
         basicBox = gui.widgetBox(
             widget=self.controlArea,
             box="Features",
@@ -86,7 +85,7 @@ class CTAStringsFeatures(OWCTAKernelBase):
         )
 
     @Inputs.cta_data
-    def set_ctaData(self, cta_data: Optional[tuple]) -> None:  # noqa: D401
+    def set_ctaData(self, cta_data: tuple | None) -> None:
         """Receive the upstream CTAData : the session and a ref to the upstream segmentation"""
 
         # Store the new ref and trigger recomputation if possible.
@@ -104,7 +103,7 @@ class CTAStringsFeatures(OWCTAKernelBase):
         # Parameters are recorded into the GraphSpec and influence caching.
         return {"top_k": self.top_k}
 
-    def _collect_inputs(self) -> dict[str, Optional[CTARef]]:
+    def _collect_inputs(self) -> dict[str, CTARef | None]:
         """
         Collect wiring inputs for the operator call.
 

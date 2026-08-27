@@ -5,6 +5,11 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "anyqt==0.2.1",
+    "numpy==2.4.2",
+    "orange3==3.39.0",
+    "pyqt6>=6.11.0",
+    "pyqt6-webengine>=6.11.0",
     "cta-kernel==0.1.0"
 ]
 
@@ -17,11 +22,6 @@ packages = ["src/cta_orange"]
 
 [dependency-groups]
 dev = [
-    "anyqt==0.2.1",
-    "numpy==2.4.2",
-    "orange3==3.39.0",
-    "pyqt6>=6.11.0",
-    "pyqt6-webengine>=6.11.0",
     "pytest>=9.1.1",
     "ruff>=0.16.0",
     "setuptools==65.5.0",

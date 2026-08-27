@@ -1,9 +1,8 @@
-import pytest
+from unittest.mock import MagicMock
+
 from Orange.widgets.tests.base import WidgetTest
-from unittest.mock import MagicMixin, MagicMock
 
 from cta_orange.widgets.filter_strings import StringsFilter
-
 
 
 class TestFilterWidget(WidgetTest):

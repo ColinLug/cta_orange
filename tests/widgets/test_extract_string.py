@@ -1,10 +1,10 @@
-from os import wait
 
-import pytest
-from Orange.widgets.tests.base import WidgetTest
 from unittest.mock import MagicMock
 
+from Orange.widgets.tests.base import WidgetTest
+
 from cta_orange.widgets.extract_string import ExtractStringsCTA
+
 
 class TestExtractStringWidget(WidgetTest):
     """Tests for ExtractStringsCTA."""
@@ -40,10 +40,10 @@ class TestExtractStringWidget(WidgetTest):
         self.widget.source_id_cols = "b    , c"
         result = self.widget.handleNewSignals()
         self.assertIsNone(result)
-        self.widget.error.assert_called_with(f"Column(s) not found in upstream table: d")
+        self.widget.error.assert_called_with("Column(s) not found in upstream table: d")
 
         self.widget.string_col = "a"
         self.widget.source_id_cols = "d,e"
         result = self.widget.handleNewSignals()
         self.assertIsNone(result)
-        self.widget.error.assert_called_with(f"Column(s) not found in upstream table: d, e")
+        self.widget.error.assert_called_with("Column(s) not found in upstream table: d, e")

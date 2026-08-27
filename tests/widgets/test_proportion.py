@@ -1,9 +1,8 @@
-import pytest
+from unittest.mock import MagicMock
+
 from Orange.widgets.tests.base import WidgetTest
-from unittest.mock import MagicMixin, MagicMock
 
 from cta_orange.widgets.proportion import CTAProportion
-
 
 
 class TestProportionWidget(WidgetTest):
