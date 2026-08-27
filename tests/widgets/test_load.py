@@ -7,7 +7,7 @@ from cta_orange.widgets.load import LoadTSVFile
 
 
 
-class TestClaimWidget(WidgetTest):
+class TestLoadWidget(WidgetTest):
     """Tests for LoadTSVFile."""
 
     def setUp(self):
