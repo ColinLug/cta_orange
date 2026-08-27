@@ -185,7 +185,6 @@ class ExtractStringsCTA(OWCTAKernelBase):
             Optional[bool]: None if no upstream or falsely named columns, True otherwise
         """
         self.error()
-        self.warning()
         if self.ref is None or self._logic.session is None:
             self.error("No upstream data connected.")
             self._send_none()

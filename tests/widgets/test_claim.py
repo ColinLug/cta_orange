@@ -1,5 +1,3 @@
-from os import wait
-
 import pytest
 from Orange.widgets.tests.base import WidgetTest
 from unittest.mock import MagicMock

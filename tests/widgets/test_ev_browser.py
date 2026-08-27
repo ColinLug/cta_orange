@@ -10,7 +10,7 @@ def test_truncate():
     assert _truncate("Short text") == "Short text"
     assert _truncate("Shorter text", 7) == "Shorter..."
 
-class TestClaimWidget(WidgetTest):
+class TestEvBrowserWidget(WidgetTest):
     """Tests for EvidenceBrowserCTA"""
 
     def setUp(self):
