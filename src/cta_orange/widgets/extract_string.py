@@ -41,7 +41,6 @@ class ExtractStringsCTA(OWCTAKernelBase):
     op_id = "BuildStringStore"
     out_port = "string_store"
 
-    kinds=["none", "strip", "lower", "nfkc", "emoji_strip_skin_tone"]
 
     string_col = Setting("")
     source_id_cols = Setting("")
@@ -53,6 +52,7 @@ class ExtractStringsCTA(OWCTAKernelBase):
     def __init__(self):
         """Manages the class creation. Basic UI is created here."""
         super().__init__()
+        self.kinds=["none", "strip", "lower", "nfkc", "emoji_strip_skin_tone"]
         self.ref: CTARef | None = None
         basicBox = gui.widgetBox(
             widget=self.controlArea,
