@@ -142,6 +142,5 @@ class EvidenceBrowserCTA(OWWidget):
         if self.displayBool and self.session is not None and self.ref is not None:
             self.browserPrev.clear()
             list_evidences = self.session.all_evidence()
-            print(list_evidences, list_evidences[0])
             parts = [self.formatEvidence(ev) for ev in list_evidences if ev != self.session.evidence(self.ref)]
             self.browserPrev.setPlainText("".join(parts))

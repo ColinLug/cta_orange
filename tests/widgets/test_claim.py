@@ -13,10 +13,10 @@ def test_single_line():
 
 
 class TestClaimWidget(WidgetTest):
-    """Tests pour OrangeCTAClaim."""
+    """Tests for OrangeCTAClaim."""
 
     def setUp(self):
-        """Préparation avant chaque test."""
+        """Prepare for the test"""
         # Création du widget avec les helpers Orange
         self.widget = self.create_widget(OrangeCTAClaim)
         self.widget.error = MagicMock()
