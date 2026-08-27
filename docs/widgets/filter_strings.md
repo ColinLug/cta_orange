@@ -20,7 +20,7 @@ This widget is intended to filter out strings that do not satisfy a specified pr
 ### Informations
 - **No predicate configured yet**: Shown when the predicate field is empty.
 ### Errors
-- **Upstream data are not connected.**: Shown when no input has been linked.
+- **No upstream data connected.**: Shown when no input has been linked.
 ## Example
 See the linked example [file](https://github.com/ColinLug/cta_orange/blob/main/examples/example_workflow.ows) for use.
 ## Technical notes

@@ -22,7 +22,7 @@ This widget extracts strings from a specified column of a table imported via the
 - **Send**: Compute and deliver the string store and the table to output.
 ## Messages
 ### Errors
-- **Upstream data are not connected.**: Shown when no input has been linked.
+- **No upstream data connected.**: Shown when no input has been linked.
 - **Column(s) not found in upstream table:...**: Shown when the specified column name(s) could not be found in the upstream table.
 ## Example
 See the linked example [file](https://github.com/ColinLug/cta_orange/blob/main/examples/example_workflow.ows) for use.

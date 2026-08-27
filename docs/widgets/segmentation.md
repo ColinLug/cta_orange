@@ -20,7 +20,7 @@ This widget segments strings extracted from a string store. Segmentation can be 
 - **Send**: Compute and deliver the segmented string view to the output.
 ## Messages
 ### Errors
-- **Upstream data are not connected.**: Shown when no input has been linked.
+- **No upstream data connected.**: Shown when no input has been linked.
 - **The delimiter is empty, please use "chars" mode or provide a legitimate delimiter.**: hown when the mode is set to `delimiter` but the delimiter field is empty.
 ## Example
 See the linked example [file](https://github.com/ColinLug/cta_orange/blob/main/examples/example_workflow.ows) for use.

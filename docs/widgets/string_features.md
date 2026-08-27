@@ -20,7 +20,7 @@ This widget extracts frequency-based features from a segmented string corpus. It
 - **Send**: Compute and deliver the feature table to the outputs.
 ## Messages
 ### Errors
-- **Upstream data are not connected.**: Shown when no input has been linked.
+- **No upstream data connected.**: Shown when no input has been linked.
 - **Top k must be a positive integer.**: Shown when the `top k` value is empty, not a number, or less than 1
 ## Example
 See the linked example [file](https://github.com/ColinLug/cta_orange/blob/main/examples/example_workflow.ows) for use.
