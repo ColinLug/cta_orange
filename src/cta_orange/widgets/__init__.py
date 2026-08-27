@@ -1,5 +1,3 @@
-import sysconfig
-
 # Category metadata.
 
 # Category icon show in the menu
@@ -12,17 +10,12 @@ BACKGROUND = "#CE93D8"
 DESCRIPTION = """Add-on for researchers in text analysis for Orange3"""
 
 LONG_DESCRIPTION = """
-WORK IN PROGRESS
+CTA Orange is an add-on for Orange Canvas created for Computational Text Analysis and based on CTA Kernel. \
+It adds 8 new widgets meant to propose an interface based edit of a CTA Kernel's workflow. At last, it is \
+designed to make scientific claims about text analysis in a more practicable way.
 """
 from .extract_string import ExtractStringsCTA
 from .load import LoadTSVFile
-
-#from .load import LoadTSVFile
-#from .load import LoadTSVFile
-#from .load import LoadTSVFile
-#from .load import LoadTSVFile
-#from .load import LoadTSVFile
-#from .load import LoadTSVFile
 
 # Orange utilise __all__ pour découvrir les widgets
 __all__ = [
