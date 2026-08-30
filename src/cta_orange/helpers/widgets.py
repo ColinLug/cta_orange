@@ -170,7 +170,7 @@ class _OWCTAKernelMixin:
             self.error(f"Computation failed: {exc}")
             self._send_none()
             return None
-        return self._logic.commit()
+        return ev
 
     def onDeleteWidget(self) -> None:
         """Remove authored state before delegating widget deletion to Orange."""

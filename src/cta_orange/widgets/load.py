@@ -5,7 +5,6 @@ It lets the user load a .TSV file from its local filesystem into the program.
 Exposes it as an Orange Data Table too.
 """
 
-import os
 from pathlib import Path
 from typing import Any
 
@@ -99,7 +98,7 @@ class LoadTSVFile(OWCTAKernelBase):
             master=self,
             value="dataset_id",
             orientation="horizontal",
-            label="Dataset :",
+            label="Dataset ID :",
             labelWidth=101,
             tooltip=("Dataset ID to put in scope."),
         )
@@ -231,5 +230,5 @@ class LoadTSVFile(OWCTAKernelBase):
         )
         if not file_path:
             return
-        self.path = os.path.normpath(file_path)
+        self.path = file_path
         self.lastLocation = file_path

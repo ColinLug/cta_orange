@@ -17,12 +17,12 @@ This widget is intended to be the first one of a workflow. It imports the data n
 #### Source
 - **File path**: A valid path to a `.tsv` file to import.
 #### Scope labels
-- **Dataset**: A name for the imported dataset.
+- **Dataset ID**: The identifier assigned to the imported dataset.
 - **Slice ID**: An ID for the slice of the dataset. Currently, only `all_strings` is available.
 - **Send**: Compute and deliver the table to the outputs.
 ## Messages
 ### Informations
-- **Dataset ID is empty. Don't forget to annotate it.**: Shown when the name of the dataset is empty.
+- **Dataset ID is empty. Don't forget to annotate it.**: Shown when the dataset ID is empty.
 ### Errors
 - **Please provide a valid path.**: Shown when the file could not be found at the specified path.
 - **Please provide a TSV file.**: Shown when the selected file is not a `.tsv` file.

@@ -24,4 +24,4 @@ This widget is intended to filter out strings that do not satisfy a specified pr
 ## Example
 See the linked example [file](https://github.com/ColinLug/cta_orange/blob/main/examples/example_workflow.ows) for use.
 ## Technical notes
-- The predicate is written in a custom DSL (Domain-Specific Language) and is parsed using `parse_predicate()` from the `cta_kernel.operators.predicate_dsl` module.
+- The predicate is passed to CTA Kernel as an operator parameter. CTA Kernel remains authoritative for predicate interpretation and admissibility.
