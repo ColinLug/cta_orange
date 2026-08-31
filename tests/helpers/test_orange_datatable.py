@@ -23,6 +23,14 @@ def test_create_orange_datatable_preserves_numeric_values():
     assert table.metas[0][0] == 1.0
     assert table.metas[1][0] == 2.0
 
+
+def test_create_orange_datatable_preserves_boolean_text_values():
+    """Check that boolean string metas do not become missing values."""
+    rows = [{"a": True}, {"a": False}]
+    table = create_orange_datatable(rows, ["a"])
+    assert table.metas[0][0] == "True"
+    assert table.metas[1][0] == "False"
+
 def test_create_orange_datatable_empty_returns_none():
     """Check if the return table is none if no rows given"""
     assert create_orange_datatable([],["a"]) is None

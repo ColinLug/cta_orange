@@ -37,7 +37,10 @@ def create_orange_datatable(
 
     # Table creation
     metas_array = np.array(
-        [[row[col] for col in columns] for row in rows],
+        [
+            [str(row[col]) if isinstance(row[col], bool) else row[col] for col in columns]
+            for row in rows
+        ],
         dtype=object,
     )
     return Table.from_numpy(domain, X=np.empty((len(rows), 0)), metas=metas_array)

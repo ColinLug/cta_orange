@@ -356,10 +356,7 @@ class OrangeCTAClaim(OWCTAKernelBase):
                     self.missingLineEdit,
                     self.mismatchLineEdit,
                 ):
-                    try:
-                        w.setCursorPosition(0)
-                    except Exception:
-                        pass
+                    w.setCursorPosition(0)
         return ref
 
     def sendData(self):
@@ -435,9 +432,8 @@ class OrangeCTAClaim(OWCTAKernelBase):
         # Execute the kernel for the closure needed to compute this node.
         try:
             self._logic.session.ensure_computed(sweep_node_id)
-        except Exception as exc:
+        except Exception as exc:  # noqa: BLE001
             self.error(f"Sweep failed: {exc}")
-            print(exc.context.get("violations"))
             return None
         # Resolve the output evidence and emit a CTARef.
         out_ref = self._logic.session.output_ref(sweep_node_id, port="table")

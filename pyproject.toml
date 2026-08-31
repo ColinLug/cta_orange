@@ -1,17 +1,26 @@
 [project]
 name = "cta-orange"
 version = "0.1.0"
-description = "Add your description here"
+description = "Orange Canvas add-on for authoring and executing Computational Text Analysis workflows with CTA Kernel"
 readme = "README.md"
+authors = [
+    { name = "Colin Luginbühl" },
+    { name = "Aris Xanthos" },
+]
+license-files = ["LICENSE"]
 requires-python = ">=3.12"
 dependencies = [
     "anyqt==0.2.1",
-    "numpy==2.4.2",
-    "orange3==3.39.0",
+    "numpy==2.3.5",
+    "orange3==3.40.0",
     "pyqt6>=6.11.0",
     "pyqt6-webengine>=6.11.0",
     "cta-kernel==0.1.0"
 ]
+
+[project.urls]
+Repository = "https://github.com/ColinLug/cta_orange"
+Documentation = "https://github.com/ColinLug/cta_orange/tree/main/docs"
 
 [build-system]
 requires = ["hatchling"]
