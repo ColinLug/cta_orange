@@ -24,6 +24,6 @@ This widget computes the proportion of strings that satisfy a specified predicat
 ## Example
 See the linked example [file](https://github.com/ColinLug/cta_orange/blob/main/examples/example_workflow.ows) for use.
 ## Technical notes
-- The predicate is passed to CTA Kernel as an operator parameter. CTA Kernel remains authoritative for predicate interpretation and admissibility.
+- The predicate is passed to CTA Kernel as an operator parameter. Its syntax and admissibility are defined in the [CTA Kernel `comhum_v0` profile](https://github.com/axanthos/cta_kernel/blob/main/docs/comhum-profile.md#predicate-language-and-chained-views) and enforced by CTA Kernel.
 - If the predicate field is empty, the widget displays an information message and sends no output.
 - The widget currently only supports `"mass"` mode (the `mode` setting is hardcoded and not exposed in the UI).
