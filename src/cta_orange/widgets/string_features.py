@@ -18,6 +18,17 @@ from cta_orange.helpers.session import CTASession
 from cta_orange.helpers.widgets import OWCTAKernelBase
 
 
+# Match the closed StringFeatures.order_by domain in CTA Kernel 0.1.0.
+_ORDER_CHOICES = [
+    ("Count (descending)", "count_desc"),
+    ("Count (ascending)", "count_asc"),
+    ("Length (descending)", "len_desc"),
+    ("Length (ascending)", "len_asc"),
+    ("Variety (descending)", "variety_desc"),
+    ("Variety (ascending)", "variety_asc"),
+]
+
+
 class CTAStringsFeatures(OWCTAKernelBase):
     """Creates a Data Table of the imported segmented corpus strings."""
     # Widget's name as displayed in the canvas
@@ -47,6 +58,7 @@ class CTAStringsFeatures(OWCTAKernelBase):
     out_port = "table"
 
     top_k = Setting(20)
+    order_by = Setting("count_desc")
     want_main_area = False
     resizing_enabled = False
 
@@ -72,10 +84,31 @@ class CTAStringsFeatures(OWCTAKernelBase):
             label="Top k :",
             labelWidth=150,
             # callback=self.sendButton.settingsChanged,
-            tooltip=("The number of top (most frequent) strings to keep."),
+            tooltip=("The number of rows to keep after applying the selected ordering."),
             valueType=int,
             validator=QIntValidator(1,9999999),
         )
+
+        # Derive transient UI position from the persisted kernel identifier.
+        order_values = [value for _label, value in _ORDER_CHOICES]
+        try:
+            self._order_index = order_values.index(self.order_by)
+        except ValueError:
+            self.order_by = "count_desc"
+            self._order_index = order_values.index(self.order_by)
+
+        # Let Orange construct, populate, synchronize, and wire the selector.
+        self.orderCombo = gui.comboBox(
+            widget=basicBox,
+            master=self,
+            value="_order_index",
+            items=_ORDER_CHOICES,
+            label="Order by :",
+            orientation="horizontal",
+            callback=self._order_changed,
+            labelWidth=150,
+        )
+
         gui.button(
             widget=self.controlArea,
             master=self,
@@ -83,6 +116,10 @@ class CTAStringsFeatures(OWCTAKernelBase):
             callback=self.sendData,
             tooltip=("Send the data to process it."),
         )
+
+    def _order_changed(self) -> None:
+        """Persist the kernel identifier selected through the Orange control."""
+        self.order_by = str(self.orderCombo.currentData())
 
     @Inputs.cta_data
     def set_ctaData(self, cta_data: tuple | None) -> None:
@@ -101,7 +138,7 @@ class CTAStringsFeatures(OWCTAKernelBase):
             dict[str, Any]: The parameters recorded onto the GraphSpec.
         """
         # Parameters are recorded into the GraphSpec and influence caching.
-        return {"top_k": self.top_k}
+        return {"top_k": self.top_k, "order_by": self.order_by}
 
     def _collect_inputs(self) -> dict[str, CTARef | None]:
         """

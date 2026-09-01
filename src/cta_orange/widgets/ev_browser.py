@@ -6,6 +6,7 @@ import json
 from AnyQt.QtWidgets import QTextBrowser
 from cta_kernel.runtime.evidence import Evidence
 from Orange.widgets import gui
+from Orange.widgets.settings import Setting
 from Orange.widgets.widget import Input, OWWidget
 
 from cta_orange.helpers.ref import CTARef
@@ -37,7 +38,7 @@ class EvidenceBrowserCTA(OWWidget):
     want_main_area = False
     resizing_enabled = True
     displayBool = False
-    payloadBool = False
+    payloadBool = Setting(True)
 
     def __init__(self):
         """Manages the class creation. Basic UI is created here."""

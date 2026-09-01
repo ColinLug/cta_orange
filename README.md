@@ -10,9 +10,9 @@
 For development from source, [uv](https://docs.astral.sh/uv/) is also required.
 
 ## Installation
-For regular use, install the released package from PyPI:
+For regular use with the 0.1.1 release, install the package from PyPI:
 ```bash
-python -m pip install cta-orange==0.1.0
+python -m pip install cta-orange==0.1.1
 ```
 
 For development from a repository checkout, open a terminal in the folder containing `pyproject.toml` and run:
