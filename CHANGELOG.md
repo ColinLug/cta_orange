@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.1 — unreleased
+## 0.1.1 — 2026-09-01
 
 - `Strings Features` now exposes CTA Kernel's six supported ordering modes as a
   visible, persisted control and applies `top_k` after the selected ordering.
