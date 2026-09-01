@@ -38,7 +38,7 @@ class EvidenceBrowserCTA(OWWidget):
     want_main_area = False
     resizing_enabled = True
     displayBool = False
-    payloadBool = Setting(True)
+    payloadBool = Setting(False)
 
     def __init__(self):
         """Manages the class creation. Basic UI is created here."""
