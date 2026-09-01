@@ -80,14 +80,14 @@ class TestSegmentationRestoredVisibility(WidgetTest):
 
 
 class TestEvidenceBrowserPayloadSetting(WidgetTest):
-    """Require payload display to be useful by default and restorable."""
+    """Require payload display to use a safe default and remain restorable."""
 
-    def test_new_browser_displays_payload_by_default(self):
-        """A fresh browser starts with Display payload checked."""
+    def test_new_browser_hides_payload_by_default(self):
+        """A fresh browser starts with Display payload unchecked."""
         widget = self.create_widget(EvidenceBrowserCTA, stored_settings={})
 
-        self.assertTrue(widget.payloadBool)
-        self.assertTrue(widget.payloadCheck.isChecked())
+        self.assertFalse(widget.payloadBool)
+        self.assertFalse(widget.payloadCheck.isChecked())
         self.assertFalse(widget.displayBool)
 
     def test_saved_payload_choice_is_restored(self):
@@ -99,4 +99,15 @@ class TestEvidenceBrowserPayloadSetting(WidgetTest):
 
         self.assertFalse(widget.payloadBool)
         self.assertFalse(widget.payloadCheck.isChecked())
+        self.assertFalse(widget.displayBool)
+
+    def test_saved_checked_payload_choice_is_restored(self):
+        """A saved checked payload choice survives Orange restoration."""
+        widget = self.create_widget(
+            EvidenceBrowserCTA,
+            stored_settings={"payloadBool": True},
+        )
+
+        self.assertTrue(widget.payloadBool)
+        self.assertTrue(widget.payloadCheck.isChecked())
         self.assertFalse(widget.displayBool)
