@@ -93,7 +93,9 @@ class CTASegmentation(OWCTAKernelBase):
             callback=self.sendData,
             tooltip=("Send the data to process it."),
         )
-        self.delimiterLine.setVisible(False)
+
+        # Reflect restored mode immediately instead of imposing a hidden field.
+        self.changeMode()
 
     @Inputs.cta_data
     def set_ctaData(self, cta_data: tuple | None) -> None:
@@ -143,7 +145,7 @@ class CTASegmentation(OWCTAKernelBase):
         Sends the session and the ref to output.
 
         Args:
-            ref (CTARef): Reference to the evidence to send
+            ref (CTARef): Reference to an evidence
 
         Returns:
             CTARef: The same reference to the evidence to send to be able to chain on it.

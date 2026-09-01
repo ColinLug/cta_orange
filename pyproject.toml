@@ -1,6 +1,6 @@
 [project]
 name = "cta-orange"
-version = "0.1.0"
+version = "0.1.1"
 description = "Orange Canvas add-on for authoring and executing Computational Text Analysis workflows with CTA Kernel"
 readme = "README.md"
 authors = [
